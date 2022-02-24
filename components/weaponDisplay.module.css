@@ -1,0 +1,259 @@
+
+.body{
+  font: 22px "Microsoft YaHei", Futura, sans-serif ;
+  margin: 0;
+}
+
+
+.weaponInfo{
+  display: block;
+  position: absolute;
+  left: 145px;
+  top: 110px;
+}
+
+.itemIcon{
+  position: relative;
+  left: 20px;
+  top:auto
+}
+
+.itemImg {
+  display: block;
+  box-sizing: border-box;
+  border: 3px solid #fff;
+  position: relative;
+  left: 0px;
+  top: 0px;
+}
+
+.itemWatermark{
+  display: block;
+  box-sizing: border-box;
+  position: relative;
+  left: 3px;
+  top: -99px;
+}
+
+.weaponSecondaryIcon{
+  width: 182px;
+  left: 0px;
+  top: 0px;
+  opacity: 0.5;
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+  float: right;
+}
+
+
+.weaponName {
+  font-family: "Microsoft YaHei";
+  position: relative;
+  top: -16px;
+  color:#fff;
+  font-size: 70px;
+  margin: 0px;
+  font-weight: normal;
+}
+
+.itemTypeDisplayName {
+  position: relative;
+  left: 0px;
+  top: -28px;
+  color: lightgray;
+  font-size: 32px;
+  margin: 0px;
+  font-weight: lighter;
+}
+
+.flavorText {
+  color: lightgray;
+  font-size: 22px;
+  font-weight: normal;
+  width: 740px;
+  margin: 0px;
+}
+
+.linkH{
+  width: 740px;
+  height: 1px;
+  border-top: solid darkgray 1px;
+  position: relative ;
+  left: 0px;
+  top: 10px;
+  opacity: 0.6;
+}
+
+.linkS{
+  width: 0px;
+  height: 750px;
+  border-right: dashed darkgray 1px;
+  position: relative;
+  left: 7px;
+  top: 10px;
+  margin: 8px;
+  opacity: 0.8;
+}
+
+.plugImg{
+  width: 60px;
+  height: 60px;
+  position: relative ;
+  left: 6px;
+  top: 7px;
+}
+
+.weaponFeatures{
+  padding: 30px 0px 30px 50px;
+  background: rgb(40 40 40);
+  z-index: 1;
+}
+.drawStats{
+  padding: 30px 0px 30px 50px ;
+  background: rgb(40 40 40);
+}
+
+.background{
+  background: rgb(108,106,99);
+  width: 1920px;
+  position: absolute ;
+  left: 0px;
+  top: 0px;
+}
+
+.backgroundFiltered{
+  background: rgb(132,129,120);
+  width: 1920px;
+  height: 1080px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  opacity: 0.45;
+}
+
+@font-face {
+  font-family: Destiny2;
+  src: url("../fonts/destiny2.otf") format("opentype");
+}
+
+.backgroundDefault{
+  filter: blur(3px);
+  width: 1940px;
+  position: absolute;
+  left: -5px;
+  top: -5px;
+}
+
+.filtered {
+  /* Chrome, Safari, Opera */
+  filter: blur(1px);
+  background: rgb(141, 139, 139);
+  width: 745px;
+  height: 800px;
+  position: absolute ;
+  left: 0px;
+  top: 40px;
+  opacity: 0.4;
+  z-index: 0;
+  /* overflow: hidden; */
+}
+
+div.plugBorder{
+  width: 72px;
+  height: 72px;
+  border: 2px solid darkgray;
+  border-radius:50%;
+  position: relative ;
+  left: 7px;
+  top: 5px;
+  margin: 5px 0px;
+  z-index: 2;
+}
+
+.plugName{
+  color: white;
+  text-align: left;
+  vertical-align: middle;
+  font-size: 20px;
+  margin: 0px;
+  font-weight:lighter ;
+  position: relative ;
+  left: 8px;
+  top: 45px;
+  width: 100px;
+  overflow: hidden;
+  text-overflow: clip;
+}
+
+.skinName{
+  color: lightgrey;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 18px;
+  margin: 0px;
+  font-weight:lighter ;
+  width: 85px;
+  overflow: hidden;
+  text-overflow: clip;
+}
+
+div.plugInfo{
+  display: flex;
+  z-index: 2;
+}
+
+.featuresText {
+  position: relative ;
+  left: 0px;
+  top: 5px;
+  color: lightgray;
+  text-align: left;
+  vertical-align: top;
+  font-size: 22px;
+  margin: 0px;
+  font-weight: lighter;
+}
+
+div.statsBackground{
+  width: 160px;
+  height: 18px;
+  background: rgb(85, 85, 85);
+  position: relative;
+  left: 15px;
+  top: 4px;
+}
+
+div.statsForeground{
+  width: 0px;
+  height: 18px;
+  background: lightgray;
+  position: relative;
+  left: 15px;
+  top: 4px;
+}
+
+span.statsNum{
+  width: 50px;
+  text-align: left;
+  font-size: 20px;
+  font-weight: normal;
+  position: relative;
+  left: 15px;
+}
+
+div.weaponInherent{
+  padding: 30px 0px 40px 50px;
+  background: rgb(46 46 46);
+}
+
+div.weaponSkin{
+  padding: 20px 0px 30px 50px;
+  background: rgb(46 46 46);
+}
+
+.inherentPlugImg{
+  width: 85px;
+  height: 85px;
+  position: relative ;
+  left: 0px;
+  top: 0px;
+}
