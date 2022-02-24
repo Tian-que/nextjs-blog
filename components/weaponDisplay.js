@@ -121,14 +121,15 @@ class WeaponFeatures extends React.Component{
   render() {
     const max = Math.max(...this.props.data.武器特性.map(x => x.length))
     const mod = (this.props.data.武器特性.length == 4) ? 'l' : 's'
-    const plugHight = (mod === 'l')? 86 : 68
+    const plugHight = (mod === 'l')? 82 : 64
+    const linkSLeft = (mod === 'l')? "0px" : "6px"
     let heightSize = max * plugHight + 20
     // const top =  String(Math.min((1080 - heightSize - 45)/2, 110)) + "px"
     const SocektsDivs = this.props.data.武器特性.map((socekts) => {
       return (
         <WeaponPlugs plugs={socekts} mod={mod}/>
       )
-    }).reduce((prev, curr) => [prev,<div style={{height: String(heightSize - 24) + "px"}} className={style.linkS}></div> , curr])
+    }).reduce((prev, curr) => [prev,<div style={{height:String(heightSize - 24) + "px", left:linkSLeft}} className={style.linkS}></div> , curr])
     return (
       <div className={style.weaponFeatures} style={{top: "10px"}}>
         <h3  className={style.featuresText}>武器特性</h3>
@@ -267,7 +268,7 @@ class WeaponStats extends React.Component{
         <div style={{position: "relative"}} className={style.linkH}></div>
         <div style={{paddingTop: "30px", paddingLeft: "00px",color: "lightgray", display: "flex"}}>
           <div>{leftDrawStatsDiv}{leftStrStatsDiv}</div>
-          <div style={{left: "0px", top: "-5px", height:"auto", marginLeft: "40px"}} className={style.linkS}/>
+          <div style={{left: "0px", top: "-5px", height:"auto", margin: "0 20px 0 30px"}} className={style.linkS}/>
           <div style={{position: "relative", left: "-10px"}}>{rightDrawStatsDiv}{rightStrStatsDiv}</div>
         </div>
       </div>

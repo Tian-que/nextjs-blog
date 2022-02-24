@@ -88,8 +88,7 @@
   height: 750px;
   border-right: dashed darkgray 1px;
   position: relative;
-  left: 7px;
-  top: 10px;
+  top: 3px;
   margin: 8px;
   opacity: 0.8;
 }
@@ -164,7 +163,6 @@ div.plugBorder{
   border-radius:50%;
   position: relative ;
   left: 7px;
-  top: 5px;
   margin: 5px 0px;
   z-index: 2;
 }
@@ -177,8 +175,7 @@ div.plugBorder{
   margin: 0px;
   font-weight:lighter ;
   position: relative ;
-  left: 8px;
-  top: 45px;
+  left: 10px;
   width: 100px;
   overflow: hidden;
   text-overflow: clip;
@@ -199,6 +196,7 @@ div.plugBorder{
 div.plugInfo{
   display: flex;
   z-index: 2;
+  align-items: center;
 }
 
 .featuresText {
