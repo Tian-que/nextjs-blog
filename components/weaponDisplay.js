@@ -93,8 +93,8 @@ class WeaponSecondaryIcon extends React.Component{
 class WeaponPlugs extends React.Component{
   render() {
     const borderSize = this.props.mod === "l" ? "72px" : "54px"
-    const imgSize = this.props.mod === "l" ? "60px" : "48px"
-    const marginSize = this.props.mod === "l" ? "6px" : "3px"
+    const imgSize = this.props.mod === "l" ? "58px" : "48px"
+    const marginSize = this.props.mod === "l" ? "5px" : "1px"
     const fontsize = this.props.mod === "l" ? "18px" : "16px"
     const fontWidth = this.props.mod === "l" ? "100px" : "80px"
     let plugIconDiv = this.props.plugs.map((plug) => {
