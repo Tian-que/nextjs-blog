@@ -120,7 +120,7 @@ class WeaponFeatures extends React.Component{
   }
   render() {
     const max = Math.max(...this.props.data.武器特性.map(x => x.length))
-    const mod = (this.props.data.武器特性.length == 4) ? 'l' : 's'
+    const mod = (this.props.data.武器特性.length <= 4) ? 'l' : 's'
     const plugHight = (mod === 'l')? 86 : 68
     let heightSize = max * plugHight + 20
     // const top =  String(Math.min((1080 - heightSize - 45)/2, 110)) + "px"
@@ -491,5 +491,6 @@ class WeaponDetails extends React.Component {
       )
     }
 }
+
 
 export default WeaponDetails
