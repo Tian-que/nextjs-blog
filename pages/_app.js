@@ -2,6 +2,7 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import { extendTheme } from '@chakra-ui/react'
 import 'regenerator-runtime/runtime';
+import '../styles/App.css'
 
 const colors = {
   brand: {
