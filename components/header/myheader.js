@@ -173,7 +173,7 @@ export default function MyHeader() {
               onClick={toggleMode}
               icon={<SwitchIcon />}
             />
-            <img src={Goutou} alt='goutou'/>
+            <img src={Goutou} alt='goutou' width='187px'/>
             <IconButton
               display={{ base: "flex", md: "none" }}
               aria-label="Open menu"
