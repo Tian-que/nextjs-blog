@@ -59,9 +59,12 @@ export default function MyHeader() {
         justifySelf="self-start"
         onClick={mobileNav.onClose}
       />
+      <Link href='/' passHref>
       <Button w="full" variant="ghost"  leftIcon={<AiFillHome />}>
-        Dashboard
+        Home
       </Button>
+      </Link>
+      <Link href='/weapon' passHref>
       <Button
         w="full"
         variant="solid"
@@ -69,16 +72,17 @@ export default function MyHeader() {
         
         leftIcon={<AiOutlineInbox />}
       >
-        Inbox
+        Weapons
       </Button>
-      <Button
+      </Link>
+      {/* <Button
         w="full"
         variant="ghost"
         
         leftIcon={<BsFillCameraVideoFill />}
       >
         Videos
-      </Button>
+      </Button> */}
     </VStack>
   );
   return (
@@ -150,6 +154,15 @@ export default function MyHeader() {
                 Sign up
               </Button>
             </HStack> */}
+            <IconButton 
+              as="a" 
+              href="https://github.com/Tian-que" 
+              size="md"
+              variant="ghost"
+              color="current"
+              aria-label="GitHub" 
+              icon={<FaGithub fontSize="1.25rem" />} 
+            />
             <IconButton
               size="md"
               fontSize="lg"
@@ -159,15 +172,6 @@ export default function MyHeader() {
               ml={{ base: "0", md: "3" }}
               onClick={toggleMode}
               icon={<SwitchIcon />}
-            />
-            <IconButton 
-              as="a" 
-              href="https://github.com/Tian-que" 
-              size="md"
-              variant="ghost"
-              color="current"
-              aria-label="GitHub" 
-              icon={<FaGithub fontSize="1.25rem" />} 
             />
             <img src={Goutou} alt='goutou'/>
             <IconButton
