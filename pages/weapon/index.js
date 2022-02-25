@@ -5,7 +5,7 @@ import { getAllWeapon } from '../../lib/weapon.js'
 import { Box, Image, Badge, Center } from '@chakra-ui/react'
 import {ArrowLeftIcon, ArrowRightIcon, ChevronLeftIcon, ChevronRightIcon} from '@chakra-ui/icons'
 import { Button, ButtonGroup, Stack, Select ,Input ,Flex, Spacer, SimpleGrid } from '@chakra-ui/react'
-import { Footer } from '../../components/footer/footer.js';
+import Layout from '../../components/layout.js';
 import WeaponDrawer from '../../components/weapon/weaponDrawer.js';
 
 function GlobalFilter({
@@ -331,19 +331,21 @@ function MyTbale(params) {
   )
 }
 
-export default function WeaponTable() {
+function GetTable() {
   const { weapon, isLoading, isError } = getAllWeapon()
   if (isLoading) return <div>Loading...</div>
   if (isError) return <div>Failed to load</div>
+  return <MyTbale weapon={weapon} />
+}
+
+export default function WeaponTable() {
   return (
-    <>
+    <Layout>
       <Center>
-        <Box maxW='85%' borderWidth='1px' borderRadius='lg' overflow='hidden' textAlign='center' >
-          <MyTbale weapon={weapon} />
+        <Box maxW='100%' borderWidth='1px' borderRadius='lg' overflow='hidden' textAlign='center' >
+          <GetTable />
         </Box>
       </Center>
-      <Footer />
-    </>
-    
+    </Layout>
   )
 }

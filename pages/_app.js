@@ -5,17 +5,29 @@ import 'regenerator-runtime/runtime';
 
 const colors = {
   brand: {
-    900: '#1a365d',
-    800: '#153e75',
-    700: '#2a69ac',
-  },
-}
+    50: "#ecefff",
+    100: "#cbceeb",
+    200: "#a9aed6",
+    300: "#888ec5",
+    400: "#666db3",
+    500: "#4d5499",
+    600: "#3c4178",
+    700: "#2a2f57",
+    800: "#181c37",
+    900: "#080819"
+  }
+};
 
-const theme = extendTheme({ colors })
+const config = {
+  initialColorMode: "light",
+  useSystemColorMode: false
+};
+
+const theme = extendTheme({ colors, config })
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <Component {...pageProps} />
     </ChakraProvider>
   )
