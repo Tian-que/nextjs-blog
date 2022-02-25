@@ -20,7 +20,8 @@ import { AiFillHome, AiOutlineInbox, AiOutlineMenu } from "react-icons/ai";
 import { BsFillCameraVideoFill } from "react-icons/bs";
 import { FaMoon, FaSun } from "react-icons/fa";
 import Goutou from '../../icons/goutou.svg'
-import Fengche from "../../icons/fengche.svg";
+import Fengche from "../../icons/fengcheR.svg";
+import style from "../../styles/utils.module.css"
 
 export default function MyHeader() {
   const { toggleColorMode: toggleMode } = useColorMode();
@@ -114,7 +115,7 @@ export default function MyHeader() {
                 display="flex"
                 alignItems="center"
               >
-                <img src={Fengche} width='50px'/>
+                <img src={Fengche} className={style.Applogo} width='50px'/>
                 <VisuallyHidden>Choc</VisuallyHidden>
               </chakra.a>
             </Link>

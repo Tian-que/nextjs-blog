@@ -7,6 +7,7 @@ import {
 } from '@chakra-ui/react'
 import * as React from 'react'
 import Fengche from '../../icons/fengche.svg'
+import style from "../../styles/utils.module.css"
 
 export default function MyFooter() {
   return (
@@ -28,7 +29,7 @@ export default function MyFooter() {
             flexGrow: 1,
             ml: 8,
           }}>
-          <img src={Fengche}  width='80px'/>
+          <img src={Fengche} className={style.Applogo} width='80px'/>
         </Flex>
         <Text pt={6} fontSize='md' textAlign={'center'}>
           &copy; {new Date().getFullYear()} 天阙. All rights reserved. 才没有这种东西呢~
