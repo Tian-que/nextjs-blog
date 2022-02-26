@@ -22,6 +22,7 @@ import { FaMoon, FaSun } from "react-icons/fa";
 import Goutou from '../../icons/goutou.svg'
 import Fengche from "../../icons/fengcheR.svg";
 import style from "../../styles/utils.module.css"
+import Head from 'next/head'
 
 export default function MyHeader() {
   const { toggleColorMode: toggleMode } = useColorMode();
@@ -88,6 +89,9 @@ export default function MyHeader() {
   );
   return (
     <React.Fragment>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+      </Head>
       <chakra.header
         ref={ref}
         shadow={y > height ? "sm" : undefined}
@@ -102,7 +106,7 @@ export default function MyHeader() {
       >
         <Flex
           w="full"
-          h="4.5rem"
+          h="7vh"
           px="6"
           mx="auto"
           alignItems="center"

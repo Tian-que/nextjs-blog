@@ -188,7 +188,7 @@ function MyTbale(params) {
   )
   return (
     <>
-      <Table {...getTableProps()} variant='striped'>
+      <Table {...getTableProps()} variant='striped' width='60vw'>
         <Thead>
           {headerGroups.map(headerGroup => (
             <Tr {...headerGroup.getHeaderGroupProps()}>
@@ -341,10 +341,12 @@ function GetTable() {
 export default function WeaponTable() {
   return (
     <Layout>
-      <Center>
-        <Box maxW='100%' borderWidth='1px' borderRadius='lg' overflow='hidden' textAlign='center' >
-          <GetTable />
-        </Box>
+      <Center maxW='100%' mt='10'>
+          <Box maxW='100%' height='85vh' borderWidth='1px' borderRadius='lg' textAlign='center' overflowY='auto'>
+            {/* <Scrollbars style={{width: '100vh'}}> */}
+              <GetTable />
+            {/* </Scrollbars> */}
+          </Box>
       </Center>
     </Layout>
   )
