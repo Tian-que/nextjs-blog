@@ -46,7 +46,7 @@ function DefaultColumnFilter({
     <Input
       value={filterValue || ''}
       size='xs'
-      minW='120px'
+      minW='100%'
       onChange={e => {
         setFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
       }}
@@ -223,16 +223,16 @@ function MyTbale(params) {
           {page.map((row, i) => {
             prepareRow(row)
             return (
-              <Tr {...row.getRowProps()}>
+              <Tr maxH='20vw' {...row.getRowProps()} overflow='auto'>
                 {row.cells.map(cell => {
                   let cellDisplay
-                  if (cell.column.isVersion) cellDisplay=<Badge variant='outline'>{cell.render('Cell')}</Badge>
+                  if (cell.column.isVersion) cellDisplay=<Badge fontSize='1rem' variant='outline'>'11'</Badge>
                   else if (cell.column.isName) {
                     if (cell.row.values.createVersion === cell.row.values.updateVersion)
                       cellDisplay = (
                         <>
-                          <WeaponDrawer name={cell.value} />
-                          <Badge colorScheme='green' variant='solid' ml='1' fontSize='0.6em'>new</Badge>
+                          <WeaponDrawer  width='5vw' fontSize='1rem' name={cell.value} />
+                          <Badge colorScheme='green' variant='solid' ml='1' fontSize='0.6rem'>new</Badge>
                         </>
                       )
                     else cellDisplay = <WeaponDrawer name={cell.value} />
@@ -249,11 +249,12 @@ function MyTbale(params) {
           })}
         </Tbody>
       </Table>
-      <Center height = '80px'>
+      <Center height='8vh'>
         <Flex width='97%'>
           <Button 
-            width = '85px'
-            leftIcon={<ArrowLeftIcon />} 
+            width = '4vw'
+            fontSize='1vw'
+            height='4vh'
             onClick={() => gotoPage(0)} 
             disabled={!canPreviousPage} 
             colorScheme='teal' 
@@ -263,8 +264,9 @@ function MyTbale(params) {
           </Button>
           <Spacer />
           <Button 
-            width = '95px'
-            leftIcon={<ChevronLeftIcon />} 
+            width = '4vw'
+            fontSize='1vw'
+            height='4vh'
             onClick={() => previousPage(0)} 
             disabled={!canPreviousPage} 
             colorScheme='teal' 
@@ -273,7 +275,11 @@ function MyTbale(params) {
             上一页
           </Button>
           <Spacer />
-          <chakra.span pl='2' alignSelf='center'>
+          <chakra.span pl='2' 
+            alignSelf='center' 
+            fontSize='1vw'
+            height='4vh'
+            >
             Page{' '}
             <strong>
               {pageIndex + 1} of {pageOptions.length}
@@ -281,8 +287,8 @@ function MyTbale(params) {
             | Go to page:{' '}
             <Input 
               htmlSize={4} 
-              width='50px' 
-              height='auto'
+              width='4.5rem' 
+              height='4vh'
               type='number'
               defaultValue={pageIndex + 1}
               onChange={e => {
@@ -293,7 +299,10 @@ function MyTbale(params) {
           </chakra.span>
           <Spacer />
           <Select 
-            width = '130px'
+            width = '10vw'
+            minw='7vw'
+            fontSize='1vw'
+            height='4vh'
             value={pageSize}
             onChange={e => {
               setPageSize(Number(e.target.value))
@@ -307,7 +316,9 @@ function MyTbale(params) {
           </Select>
           <Spacer />
           <Button 
-            rightIcon={<ChevronRightIcon />} 
+            width='4vw'
+            height='4vh'
+            fontSize='1vw'
             onClick={() => nextPage(0)} 
             disabled={!canNextPage} 
             colorScheme='teal' 
@@ -317,7 +328,9 @@ function MyTbale(params) {
           </Button>
           <Spacer />
           <Button 
-            rightIcon={<ArrowRightIcon />} 
+            width='4vw'
+            height='4vh'
+            fontSize='1vw'
             onClick={() => gotoPage(pageCount - 1)} 
             disabled={!canNextPage} 
             colorScheme='teal' 
