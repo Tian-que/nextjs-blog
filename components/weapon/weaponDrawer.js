@@ -1,6 +1,7 @@
 import {
   Badge,
   Button,
+  Box, 
   Drawer,
   DrawerBody,
   DrawerOverlay,
@@ -9,12 +10,12 @@ import {
 } from '@chakra-ui/react'
 import { WeaponRender } from './weaponRender.js'
 
-export default function WeaponDrawer({name}) {
+export default function WeaponDrawer({name, children}) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
-      <Button onClick={onOpen} variant='ghost' fontSize='1.2rem'>
-        {name}
+      <Button onClick={onOpen} size='auto' variant='ghost'>
+        {children}
       </Button>
       <Drawer
         isOpen={isOpen}

@@ -7,6 +7,7 @@ import {ArrowLeftIcon, ArrowRightIcon, ChevronLeftIcon, ChevronRightIcon} from '
 import { Button, ButtonGroup, Stack, Select ,Input ,Flex, Spacer, SimpleGrid, Tag } from '@chakra-ui/react'
 import Layout from '../../components/layout.js';
 import WeaponDrawer from '../../components/weapon/weaponDrawer.js';
+import WeaponBox from '../../components/weapon/weaponBox.js';
 
 function GlobalFilter({
   preGlobalFilteredRows,
@@ -97,16 +98,19 @@ function MyTbale(params) {
   const data = React.useMemo(
     () => params.data.data.map((data) => {
       return {
+        hash: data[0],
         name: data[1],
         icon: data[2],
         type: data[3],
         tierType: data[4],
         createVersion: data[5].slice(7,15),
         updateVersion: data[6].slice(7,15),
+        flavorText: data[7]
       }
     }),
     []
   )
+
 
   const columns = React.useMemo(
     () => [
@@ -114,6 +118,16 @@ function MyTbale(params) {
         Header: '名称',
         accessor: 'name', // accessor is the "key" in the data
         isName: true
+      },
+      {
+        Header: '图标',
+        accessor: 'icon', 
+        isHidden: true
+      },
+      {
+        Header: '个性文本',
+        accessor: 'flavorText', 
+        isHidden: true
       },
       {
         Header: '类型',
@@ -294,7 +308,6 @@ function MyTbale(params) {
       </Button>
     </Flex>
   </Center>
-  console.log(lastVersion)
   return (
     <>
       {pageControl}
@@ -302,7 +315,9 @@ function MyTbale(params) {
         <Thead>
           {headerGroups.map(headerGroup => (
             <Tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
+              {headerGroup.headers.map(column => {
+                if (!column.isHidden)
+                return (
                 <Th
                   {...column.getHeaderProps()}
                 >
@@ -312,7 +327,7 @@ function MyTbale(params) {
                     <Center>{column.canFilter ? column.render('Filter') : null}</Center>
                   </SimpleGrid>
                 </Th>
-              ))}
+              )})}
             </Tr>
           ))}
           <Tr>
@@ -334,21 +349,18 @@ function MyTbale(params) {
           {page.map((row, i) => {
             prepareRow(row)
             return (
-              <Tr {...row.getRowProps()} overflow='auto'>
+              <Tr {...row.getRowProps()} overflow='auto' height='10vh'>
                 {row.cells.map(cell => {
+                  if (cell.column.isHidden) return
                   let cellDisplay
                   if (cell.column.isVersion) cell.value === lastVersion ? 
                   cellDisplay=<Badge fontSize='1rem' colorScheme='green' variant='outline'>{cell.render('Cell')}</Badge> :
                   cellDisplay=<Badge fontSize='1rem' colorScheme='gray' variant='outline'>{cell.render('Cell')}</Badge>
                   else if (cell.column.isName) {
-                    if (cell.row.values.createVersion === lastVersion)
-                      cellDisplay = (
-                        <>
-                          <WeaponDrawer name={cell.value} />
-                          <Badge colorScheme='green' variant='solid' ml='1' fontSize='0.6rem'>new</Badge>
-                        </>
-                      )
-                    else cellDisplay = <WeaponDrawer name={cell.value} />
+                    cellDisplay = 
+                    <WeaponDrawer name={cell.value}>
+                      <WeaponBox data={cell.row.values} isNew={cell.row.values.createVersion === lastVersion}/>
+                    </WeaponDrawer>
                   } else if (cell.column.Header === "稀有度") {
                     cell.value === '异域' ?
                     cellDisplay=<Tag size='lg' key='lg' variant='outline' colorScheme='yellow' >{cell.render('Cell')}</Tag>:
