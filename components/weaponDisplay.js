@@ -51,7 +51,7 @@ class WeaponInfo extends React.Component{
       )
     }
     const background = (this.props.data.tierTypeName === '异域') ? "rgb(206,174,51)" : "rgb(102 60 126)"
-    const typeNameColor = (this.props.data.tierTypeName === '异域') ? "antiquewhite" : "lightgray"
+    const typeNameColor = (this.props.data.tierTypeName === '异域') ? "antiquewhite" : "rgb(102 60 126)"
     return (
       <div>
         <div style={{padding: "50px 0px 30px 50px", background: background}}>

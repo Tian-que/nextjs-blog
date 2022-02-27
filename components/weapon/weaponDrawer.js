@@ -13,7 +13,7 @@ export default function WeaponDrawer({name}) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
-      <Button onClick={onOpen} variant='ghost'>
+      <Button onClick={onOpen} variant='ghost' fontSize='1.2rem'>
         {name}
       </Button>
       <Drawer
