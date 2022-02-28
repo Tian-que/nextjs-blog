@@ -3,6 +3,7 @@ import style from './weaponDisplay.module.css'
 import heavy from '../destiny-icons/general/ammo-heavy.svg';
 import primary from '../destiny-icons/general/ammo-primary.svg';
 import special from '../destiny-icons/general/ammo-special.svg';
+import { damageTypeNameByEnum, damageTypeUrlByEnum } from './svgs/damageTypes.js';
 
 // 武器水印
 class WeaponIconWatermark extends React.Component{
@@ -23,16 +24,11 @@ class WeaponDamageTypes extends React.Component{
     this.state = {}
   }
   render() {
-    const icons = this.props.damageTypes.map(({icon}) => {
-      return (
-        <div style={{hight:"10px", width: "30px", border: "5px",position:"relative" , left: "3px"}} >
-          <img src={bungieUrl(icon)} style={{hight:"10px", width: "30px"}} alt=''/>
-        </div>
-      )
-    })
     return (
       <div style={{display: "flex", position:"relative"}}>
-        {icons}
+        <div style={{hight:"10px", width: "30px", border: "5px",position:"relative" , left: "3px"}} >
+          <img src={damageTypeUrlByEnum[this.props.defaultDamageType]} style={{hight:"10px", width: "30px", paddingTop: "5px"}} alt=''/>
+        </div>
       </div>
     )
   }
@@ -50,8 +46,8 @@ class WeaponInfo extends React.Component{
         </div>
       )
     }
-    const background = (this.props.data.tierTypeName === '异域') ? "rgb(206,174,51)" : "rgb(102 60 126)"
-    const typeNameColor = (this.props.data.tierTypeName === '异域') ? "antiquewhite" : "rgb(102 60 126)"
+    const background = (this.props.data.tierTypeName === '异域') ? "#c3a019" : "#513065"
+    const typeNameColor = (this.props.data.tierTypeName === '异域') ? "antiquewhite" : "lightgray"
     return (
       <div>
         <div style={{padding: "50px 0px 30px 50px", background: background}}>
@@ -63,7 +59,7 @@ class WeaponInfo extends React.Component{
             </div>
             <div style={{position: "relative", left: "30px", top: "3px"}}>
               <img src={ammoIcons[this.props.data.ammoType]} style={{hight:"35.7px", width: "40px"}} alt=''/>
-              <WeaponDamageTypes damageTypes = {this.props.data.damageTypes}/>
+              <WeaponDamageTypes defaultDamageType = {this.props.data.defaultDamageType}/>
             </div>
           </div>
         <span style={{float:"right", color: typeNameColor, paddingRight:"10px"}}>S{this.props.data.season}</span>
