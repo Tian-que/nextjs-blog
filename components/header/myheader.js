@@ -92,8 +92,10 @@ export default function MyHeader() {
     <React.Fragment>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-        <Script src="https://cdn.splitbee.io/sb.js" strategy="lazyOnload" />
       </Head>
+      <Script src="https://cdn.splitbee.io/sb.js" strategy="lazyOnload" onError={(e) => {
+          console.error('Script failed to load', e)
+        }}/>
       <chakra.header
         ref={ref}
         shadow={y > height ? "sm" : undefined}
