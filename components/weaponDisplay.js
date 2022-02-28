@@ -456,8 +456,8 @@ class TQSign extends React.Component {
     return (
       <div style={{padding: "10px 0px 10px 30px", background: "hsl(0deg 0% 100% / 0%)"}}>
         <span style={{color: "lightgray", fontWeight: "lighter", margin: "0px", fontSize: "14px", paddingRight: "20px"}}>ItemHash: {this.props.data.hash}</span>
-        <span style={{color: "lightgray", fontWeight: "lighter", margin: "0px", fontSize: "14px", paddingRight: "20px"}}>UpdateTime: {this.props.data.time}</span>
-        <span style={{color: "lightgray", fontWeight: "lighter", margin: "0px", fontSize: "14px", paddingRight: "20px"}}>Version: {this.props.data.version}</span>
+        <span style={{color: "lightgray", fontWeight: "lighter", margin: "0px", fontSize: "14px", paddingRight: "20px"}}>Version: {this.props.data.updateVersion.slice(7,15)}</span>
+        <span style={{color: "lightgray", fontWeight: "lighter", margin: "0px", fontSize: "14px", paddingRight: "20px"}}>https://data.tianque.top/weapon/{this.props.data.name}</span>
         <span style={{color: "lightgray", fontWeight: "lighter", margin: "0px", fontSize: "22px", paddingRight: "30px", float:"right"}}>By @天阙</span>
       </div>
     )

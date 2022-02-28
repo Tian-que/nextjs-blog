@@ -91,6 +91,7 @@ export default function MyHeader() {
     <React.Fragment>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <script async src="https://cdn.splitbee.io/sb.js"></script>
       </Head>
       <chakra.header
         ref={ref}
