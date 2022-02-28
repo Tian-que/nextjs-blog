@@ -507,14 +507,13 @@ function MyTbale(params) {
                     </WeaponDrawer>
                   } else if (cell.column.Header === "稀有度") {
                     cell.value === '异域' ?
-                    cellDisplay=<Tag size='lg' key='lg' variant='outline' colorScheme='yellow' >{cell.render('Cell')}</Tag>:
-                    cellDisplay=<Tag size='lg' key='lg' variant='outline' colorScheme='purple' >{cell.render('Cell')}</Tag>
+                    cellDisplay=<Tag size='lg' key='lg' variant='outline' colorScheme='yellow' whiteSpace="nowrap">{cell.render('Cell')}</Tag>:
+                    cellDisplay=<Tag size='lg' key='lg' variant='outline' colorScheme='purple' whiteSpace="nowrap">{cell.render('Cell')}</Tag>
                   } else if (cell.column.Header === "赛季") cellDisplay=<Tag borderRadius='full' variant='subtle' size='lg' colorScheme='green'><TagLabel>{cell.value}</TagLabel></Tag>
                   else if (cell.column.Header === "类型") cellDisplay = 
-                  <Tag borderRadius='full' variant='subtle'  maxw='5vw' fontSize='1rem' colorScheme='cyan'>
-                    <chakra.span maxW='5vw' style={{whiteSpace: "nowrap"}} >{cell.value+' '}</chakra.span>
-                    <chakra.span pl='1' style={{fontFamily: "Destiny2"}}>
-                      {weaponTypeRichTextByCategoryHash[cell.row.values.ich]}
+                  <Tag borderRadius='full' variant='subtle'  minW='5rem' maxW='10rem' fontSize='1rem' colorScheme='cyan'>
+                    <chakra.span  minW='2rem' maxW='10rem' style={{fontFamily: "Destiny2", whiteSpace: "nowrap"}}>
+                      {cell.value+' '+weaponTypeRichTextByCategoryHash[cell.row.values.ich]}
                     </chakra.span>
                   </Tag>
                   else if (cell.column.Header === "元素") cellDisplay = 
