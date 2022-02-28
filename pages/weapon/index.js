@@ -4,11 +4,12 @@ import { Table, Thead, Tbody, Tr, Th, Td, chakra } from '@chakra-ui/react'
 import { getAllWeapon } from '../../lib/weapon.js'
 import { Box, Image, Badge, Center } from '@chakra-ui/react'
 import {ArrowLeftIcon, ArrowRightIcon, ChevronLeftIcon, ChevronRightIcon} from '@chakra-ui/icons'
-import { Button, ButtonGroup, Stack, Select ,Input ,Flex, Spacer, SimpleGrid, Tag, TagLabel } from '@chakra-ui/react'
+import { Button, ButtonGroup, Stack, Select ,Input ,Flex, Spacer, SimpleGrid, Tag, TagLabel,VisuallyHidden } from '@chakra-ui/react'
 import Layout from '../../components/layout.js';
 import WeaponDrawer from '../../components/weapon/weaponDrawer.js';
 import WeaponBox from '../../components/weapon/weaponBox.js';
 import {weaponTypeRichTextByCategoryHash} from '../../components/svgs/itemCategory.js'
+import { damageTypeNameByEnum, damageTypeUrlByEnum } from '../../components/svgs/damageTypes.js';
 import style from '../../styles/utils.module.css'
 
 function GlobalFilter({
@@ -86,6 +87,38 @@ function SelectColumnFilter({
       {options.map((option, i) => (
         <option key={i} value={option}>
           {option}
+        </option>
+      ))}
+    </Select>
+  )
+}
+
+function damageTypeSelectColumnFilter({
+  column: { filterValue, setFilter, preFilteredRows, id },
+}) {
+  // Calculate the options for filtering
+  // using the preFilteredRows
+  const options = React.useMemo(() => {
+    const options = new Set()
+    preFilteredRows.forEach(row => {
+      options.add(row.values[id])
+    })
+    return [...options.values()].sort()
+  }, [id, preFilteredRows])
+
+  // Render a multi-select box
+  return (
+    <Select
+      value={filterValue}
+      onChange={e => {
+        setFilter(e.target.value || undefined)
+      }}
+      size='md'
+    >
+      <option value="">All</option>
+      {options.map((option, i) => (
+        <option key={i} value={option}>
+          {damageTypeNameByEnum[option]}
         </option>
       ))}
     </Select>
@@ -209,6 +242,11 @@ function MyTbale(params) {
         isName: true
       },
       {
+        Header: 'hash',
+        accessor: 'hash',
+        isHidden: true
+      },
+      {
         Header: '图标',
         accessor: 'icon', 
         isHidden: true
@@ -236,11 +274,10 @@ function MyTbale(params) {
         filter: 'includes',
       },
       {
-        Header: '伤害类型',
+        Header: '元素',
         accessor: 'defaultDamageType',
-        Filter: SelectColumnFilter,
-        filter: 'includes',
-        isHidden: true
+        Filter: damageTypeSelectColumnFilter,
+        filter: 'equals',
       },
       {
         Header: '赛季',
@@ -429,7 +466,7 @@ function MyTbale(params) {
                   {...column.getHeaderProps()}
                 >
                   <SimpleGrid rows={2}>
-                    <Center height='7' fontSize='xl'>{column.render('Header')}</Center>
+                    <Center height='7' fontSize='lg' >{column.render('Header')}</Center>
                     <Center height='1.5vh'/>
                     <Center>{column.canFilter ? column.render('Filter') : null}</Center>
                   </SimpleGrid>
@@ -465,7 +502,7 @@ function MyTbale(params) {
                   cellDisplay=<Badge fontSize='1rem' colorScheme='gray' variant='outline'>{cell.render('Cell')}</Badge>
                   else if (cell.column.isName) {
                     cellDisplay = 
-                    <WeaponDrawer name={cell.value}>
+                    <WeaponDrawer name={cell.value} hash={cell.row.values.hash}>
                       <WeaponBox data={cell.row.values} isNew={cell.row.values.createVersion === lastVersion}/>
                     </WeaponDrawer>
                   } else if (cell.column.Header === "稀有度") {
@@ -474,12 +511,26 @@ function MyTbale(params) {
                     cellDisplay=<Tag size='lg' key='lg' variant='outline' colorScheme='purple' >{cell.render('Cell')}</Tag>
                   } else if (cell.column.Header === "赛季") cellDisplay=<Tag borderRadius='full' variant='subtle' size='lg' colorScheme='green'><TagLabel>{cell.value}</TagLabel></Tag>
                   else if (cell.column.Header === "类型") cellDisplay = 
-                  <Tag borderRadius='full' variant='subtle' size='lg' colorScheme='cyan'>
-                    {cell.value+' '}
-                    <chakra.span maxW ='4vw' style={{fontFamily: "Destiny2"}}>
+                  <Tag borderRadius='full' variant='subtle'  maxw='5vw' fontSize='1rem' colorScheme='cyan'>
+                    <chakra.span maxW='5vw' style={{whiteSpace: "nowrap"}} >{cell.value+' '}</chakra.span>
+                    <chakra.span pl='1' style={{fontFamily: "Destiny2"}}>
                       {weaponTypeRichTextByCategoryHash[cell.row.values.ich]}
                     </chakra.span>
                   </Tag>
+                  else if (cell.column.Header === "元素") cellDisplay = 
+                  <Tag 
+                    borderRadius='sm' 
+                    variant='subtle' 
+                    width='4.5rem' 
+                    colorScheme='gray'
+                  > 
+                    <VisuallyHidden>{cell.value}</VisuallyHidden>
+                    <chakra.span fontSize='1.1rem'>{damageTypeNameByEnum[cell.value]}</chakra.span>
+                    {cell.value===1 ? 
+                    <Image pl='1' width='1.3rem' style={{filter: "drop-shadow(0px 0px 0px yellow)"}} src={damageTypeUrlByEnum[cell.value]} />: 
+                    <Image pl='1' width='1.3rem' src={damageTypeUrlByEnum[cell.value]} />}
+                  </Tag>
+                  
                   else cellDisplay = cell.value
                   return (
                     <Td fontSize='1.4rem'

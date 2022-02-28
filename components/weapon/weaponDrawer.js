@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react'
 import { WeaponRender } from './weaponRender.js'
 
-export default function WeaponDrawer({name, children}) {
+export default function WeaponDrawer({name, hash, children}) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
@@ -26,7 +26,7 @@ export default function WeaponDrawer({name, children}) {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerBody>
-            <WeaponRender wid={name}/>
+            <WeaponRender wid={hash}/>
           </DrawerBody>
         </DrawerContent>
       </Drawer>

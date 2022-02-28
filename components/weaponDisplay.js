@@ -358,6 +358,7 @@ class WeaponCH extends React.Component{
       }
     })
     let investmentStats = ''
+    console.log(this.props.data)
     if (this.props.data.武器模组[0][1].investmentStats) {
       investmentStats = Object.keys(this.props.data.武器模组[0][1].investmentStats).map((statName)=>{
         return (
