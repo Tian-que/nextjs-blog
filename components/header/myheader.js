@@ -23,6 +23,7 @@ import Goutou from '../../icons/goutou.svg'
 import Fengche from "../../icons/fengcheR.svg";
 import style from "../../styles/utils.module.css"
 import Head from 'next/head'
+import Script from 'next/script'
 
 export default function MyHeader() {
   const { toggleColorMode: toggleMode } = useColorMode();
@@ -91,7 +92,7 @@ export default function MyHeader() {
     <React.Fragment>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-        <script async src="https://cdn.splitbee.io/sb.js"></script>
+        <Script src="https://cdn.splitbee.io/sb.js" strategy="lazyOnload" />
       </Head>
       <chakra.header
         ref={ref}
