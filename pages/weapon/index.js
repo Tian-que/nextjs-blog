@@ -4,10 +4,12 @@ import { Table, Thead, Tbody, Tr, Th, Td, chakra } from '@chakra-ui/react'
 import { getAllWeapon } from '../../lib/weapon.js'
 import { Box, Image, Badge, Center } from '@chakra-ui/react'
 import {ArrowLeftIcon, ArrowRightIcon, ChevronLeftIcon, ChevronRightIcon} from '@chakra-ui/icons'
-import { Button, ButtonGroup, Stack, Select ,Input ,Flex, Spacer, SimpleGrid, Tag } from '@chakra-ui/react'
+import { Button, ButtonGroup, Stack, Select ,Input ,Flex, Spacer, SimpleGrid, Tag, TagLabel } from '@chakra-ui/react'
 import Layout from '../../components/layout.js';
 import WeaponDrawer from '../../components/weapon/weaponDrawer.js';
 import WeaponBox from '../../components/weapon/weaponBox.js';
+import {weaponTypeRichTextByCategoryHash} from '../../components/svgs/itemCategory.js'
+import style from '../../styles/utils.module.css'
 
 function GlobalFilter({
   preGlobalFilteredRows,
@@ -90,6 +92,90 @@ function SelectColumnFilter({
   )
 }
 
+// This is a custom filter UI for selecting
+// a unique option from a list
+function SortSelectColumnFilter({
+  column: { filterValue, setFilter, preFilteredRows, id },
+}) {
+  // Calculate the options for filtering
+  // using the preFilteredRows
+  const options = React.useMemo(() => {
+    const options = new Set()
+    preFilteredRows.forEach(row => {
+      options.add(row.values[id])
+    })
+    return [...options.values()].sort((a,b)=>a.slice(1)-b.slice(1)).reverse()
+  }, [id, preFilteredRows])
+
+  // Render a multi-select box
+  return (
+    <Select
+      value={filterValue}
+      onChange={e => {
+        setFilter(e.target.value || undefined)
+      }}
+      size='md'
+    >
+      <option value="">All</option>
+      {options.map((option, i) => (
+        <option key={i} value={option}>
+          {option}
+        </option>
+      ))}
+    </Select>
+  )
+}
+
+function NumberRangeColumnFilter({
+  column: { filterValue = [], preFilteredRows, setFilter, id },
+}) {
+  const [min, max] = React.useMemo(() => {
+    let min = preFilteredRows.length ? preFilteredRows[0].values[id] : 0
+    let max = preFilteredRows.length ? preFilteredRows[0].values[id] : 0
+    preFilteredRows.forEach(row => {
+      min = Math.min(row.values[id], min)
+      max = Math.max(row.values[id], max)
+    })
+    return [min, max]
+  }, [id, preFilteredRows])
+
+  return (
+    <div
+      style={{
+        display: 'flex',
+      }}
+    >
+      <input
+        value={filterValue[0] || ''}
+        type="number"
+        onChange={e => {
+          const val = e.target.value
+          setFilter((old = []) => [val ? parseInt(val, 10) : undefined, old[1]])
+        }}
+        placeholder={`Min (${min})`}
+        style={{
+          width: '70px',
+          marginRight: '0.5rem',
+        }}
+      />
+      to
+      <input
+        value={filterValue[1] || ''}
+        type="number"
+        onChange={e => {
+          const val = e.target.value
+          setFilter((old = []) => [old[0], val ? parseInt(val, 10) : undefined])
+        }}
+        placeholder={`Max (${max})`}
+        style={{
+          width: '70px',
+          marginLeft: '0.5rem',
+        }}
+      />
+    </div>
+  )
+}
+
 function MyTbale(params) {
   params.data.data.sort((a,b) => {
     if (a[5] === b[5]) return (b[4] === '异域' ? 1 : 0) - (a[4] === '异域' ? 1 : 0)
@@ -105,7 +191,10 @@ function MyTbale(params) {
         tierType: data[4],
         createVersion: data[5].slice(7,15),
         updateVersion: data[6].slice(7,15),
-        flavorText: data[7]
+        ich: data[7][data[7].length-1],
+        flavorText: data[8],
+        defaultDamageType: data[9],
+        season: 'S' + String(data[10])
       }
     }),
     []
@@ -136,10 +225,28 @@ function MyTbale(params) {
         filter: 'includes',
       },
       {
+        Header: 'ich',
+        accessor: 'ich',
+        isHidden: true
+      },
+      {
         Header: '稀有度',
         accessor: 'tierType',
         Filter: SelectColumnFilter,
         filter: 'includes',
+      },
+      {
+        Header: '伤害类型',
+        accessor: 'defaultDamageType',
+        Filter: SelectColumnFilter,
+        filter: 'includes',
+        isHidden: true
+      },
+      {
+        Header: '赛季',
+        accessor: 'season',
+        Filter: SortSelectColumnFilter,
+        filter: 'equals'
       },
       {
         Header: '创建版本',
@@ -365,7 +472,14 @@ function MyTbale(params) {
                     cell.value === '异域' ?
                     cellDisplay=<Tag size='lg' key='lg' variant='outline' colorScheme='yellow' >{cell.render('Cell')}</Tag>:
                     cellDisplay=<Tag size='lg' key='lg' variant='outline' colorScheme='purple' >{cell.render('Cell')}</Tag>
-                  }
+                  } else if (cell.column.Header === "赛季") cellDisplay=<Tag borderRadius='full' variant='subtle' size='lg' colorScheme='green'><TagLabel>{cell.value}</TagLabel></Tag>
+                  else if (cell.column.Header === "类型") cellDisplay = 
+                  <Tag borderRadius='full' variant='subtle' size='lg' colorScheme='cyan'>
+                    {cell.value+' '}
+                    <chakra.span maxW ='4vw' style={{fontFamily: "Destiny2"}}>
+                      {weaponTypeRichTextByCategoryHash[cell.row.values.ich]}
+                    </chakra.span>
+                  </Tag>
                   else cellDisplay = cell.value
                   return (
                     <Td fontSize='1.4rem'

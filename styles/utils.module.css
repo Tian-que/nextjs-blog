@@ -57,6 +57,11 @@
   }
 }
 
+@font-face {
+  font-family: Destiny2;
+  src: url("../fonts/destiny2.otf") format("opentype");
+}
+
 .Applogo {
   pointer-events: none;
 }
