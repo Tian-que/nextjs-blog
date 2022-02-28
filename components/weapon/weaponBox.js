@@ -2,11 +2,11 @@ import {Box, Badge, Image, Flex, Center } from '@chakra-ui/react'
 
 export default function WeaponBox(params) {
   return (
-    <Flex width='15vw' height='9vh' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-      <Center maxW='4vw' pl='1'>
-      <Image src={'https://bungie.net' + params.data.icon} alt={params.data.name} border='2px' borderRadius='lg' borderColor='white' width='4.5vw'/>
+    <Flex width='15vw' minW='12rem' height='5rem' borderWidth='1px' borderRadius='lg' overflow='hidden'>
+      <Center width='5rem' pl='1'>
+        <Image src={'https://bungie.net' + params.data.icon} alt={params.data.name} border='2px' borderRadius='lg' borderColor='white' minW='4rem' width='4.5vw'/>
       </Center>
-      <Box pl='1vw' pt='3' maxW='9.5vw' overflow='hidden'>
+      <Box pl='1vw' pt='3' minW='7rem' maxW='9.5vw' overflow='hidden'>
         <Box display='flex' alignItems='baseline'>
           {params.isNew ? <Badge borderRadius='full' px='2' colorScheme='teal'>New</Badge> : undefined}
           {params.data.tierType === '异域' ? 
@@ -30,7 +30,7 @@ export default function WeaponBox(params) {
           as='h4'
           lineHeight='tight'
           isTruncated
-          fontSize='1vw'
+          fontSize='1rem'
           textAlign='left'
           
         >
