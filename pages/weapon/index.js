@@ -586,7 +586,7 @@ function MyTbale(params) {
                     colorScheme='gray'
                   > 
                     <VisuallyHidden>{cell.value}</VisuallyHidden>
-                    <chakra.span fontSize='1.1rem'>{damageTypeNameByEnum[cell.value]}</chakra.span>
+                    <chakra.span fontSize='1.1rem' whiteSpace="nowrap">{damageTypeNameByEnum[cell.value]}</chakra.span>
                     {cell.value===1 ? 
                     <Image pl='1' width='1.3rem' style={{filter: "drop-shadow(0px 0px 0px yellow)"}} src={damageTypeUrlByEnum[cell.value]} />: 
                     <Image pl='1' width='1.3rem' src={damageTypeUrlByEnum[cell.value]} />}
