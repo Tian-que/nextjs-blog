@@ -345,7 +345,9 @@ class WeaponCH extends React.Component{
       if (socekt.name === '空催化插槽'){
         return (
           <div style={{position: "relative" ,left: "0px", top: "0px"}}>
-            <img src= {bungieUrl(socekt.icon)} className={style.inherentPlugImg} alt=''/>
+            {socekt.icon ? 
+            <img src= {bungieUrl(socekt.icon)} className={style.inherentPlugImg} alt=''/> :
+            <img src= {bungieUrl("/common/destiny2_content/icons/62890cb9e33bbed6a3587a1064dc860e.png")} className={style.inherentPlugImg} alt=''/>}
           </div>
         )
       } else {
@@ -358,7 +360,6 @@ class WeaponCH extends React.Component{
       }
     })
     let investmentStats = ''
-    console.log(this.props.data)
     if (this.props.data.武器模组[0][1].investmentStats) {
       investmentStats = Object.keys(this.props.data.武器模组[0][1].investmentStats).map((statName)=>{
         return (
@@ -369,17 +370,6 @@ class WeaponCH extends React.Component{
         )
       })
     }
-    const SocektsDivs2 = this.props.data.武器特性.map((socekts) => {
-      return (
-        <div style={{position: "relative" ,top: "17px", left: "10px", display: "flex", margin: "0 0 20px"}}>
-          <img src= {bungieUrl(socekts[0].icon)} className={style.inherentPlugImg} alt=''/>
-          <div style={{position: "relative" ,left: "15px", top: "12px"}}>
-            <div style={{color: "white"}}>{socekts[0].name}</div>
-            <div style={{color: "gainsboro", whiteSpace: "pre-wrap", fontFamily: "Destiny2", width: "600px", margin:"5px 0"}}>{socekts[0].description}</div>
-          </div>
-        </div>
-      )
-    })
     
     let perks = ''
     if (this.props.data.武器模组[0][1].perks) {
