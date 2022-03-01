@@ -5,10 +5,10 @@ import { damageTypeNameByEnum, damageTypeUrlByEnum } from '../../components/svgs
 export default function WeaponBox(params) {
   return (
     <Flex width={{base: "100%", md: "15vw"}} minW='12rem' height='5rem' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-      <Center width='5rem' pl='1'>
-        <Image src={'https://bungie.net' + params.data.icon} alt={params.data.name} border='2px' borderRadius='lg' borderColor='white' minW='4rem' width='4.5vw'/>
+      <Center width='70px' pl='1'>
+        <Image src={'https://bungie.net' + params.data.icon} alt={params.data.name} border='2px' borderRadius='lg' borderColor='white'  maxW='65px'/>
       </Center>
-      <Box pl='1vw' pt='3' minW='7rem' maxW='60vw' overflow='hidden' isTruncated>
+      <Box pl={{base: "2", md: "2"}} pt={{base: "1", md: "3"}} minW='7rem' maxW='60vw' overflow='hidden' isTruncated>
         <Box display={{base:"none", md: "flex"}} alignItems='baseline'>
           {params.isNew ? <Badge borderRadius='full' px='2' colorScheme='teal'>New</Badge> : undefined}
           {params.data.tierType === '异域' ? 

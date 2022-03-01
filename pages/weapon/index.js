@@ -10,6 +10,7 @@ import WeaponDrawer from '../../components/weapon/weaponDrawer.js';
 import WeaponBox from '../../components/weapon/weaponBox.js';
 import {weaponTypeRichTextByCategoryHash} from '../../components/svgs/itemCategory.js'
 import { damageTypeNameByEnum, damageTypeUrlByEnum } from '../../components/svgs/damageTypes.js';
+import Link from "next/link";
 import style from '../../styles/utils.module.css'
 
 function GlobalFilter({
@@ -364,12 +365,13 @@ function MyTbale(params) {
 
   const lastVersion = params.data.lastVersion.slice(7,15)
   const pageControl = 
-  <Center height='8vh'>
+  <SimpleGrid height='6rem'>
+    <Center>
     <Flex width='97%'>
       <Button 
-        width = '4vw'
-        fontSize='1vw'
-        height='4vh'
+        width = {{base: "3rem", md: "4rem"}}
+        fontSize={{base: "0.8rem", md: "1rem"}}
+        height='2.3rem'
         onClick={() => gotoPage(0)} 
         disabled={!canPreviousPage} 
         colorScheme='teal' 
@@ -379,9 +381,9 @@ function MyTbale(params) {
       </Button>
       <Spacer />
       <Button 
-        width = '4vw'
-        fontSize='1vw'
-        height='4vh'
+        width = {{base: "3rem", md: "4rem"}}
+        fontSize={{base: "0.8rem", md: "1rem"}}
+        height='2.3rem'
         onClick={() => previousPage(0)} 
         disabled={!canPreviousPage} 
         colorScheme='teal' 
@@ -392,8 +394,9 @@ function MyTbale(params) {
       <Spacer />
       <chakra.span pl='2' 
         alignSelf='center' 
-        fontSize='1vw'
-        height='4vh'
+        fontSize='1rem'
+        height='2.3rem'
+        display={{base:"none", md: "inline"}}
         >
         Page{' '}
         <strong>
@@ -403,7 +406,7 @@ function MyTbale(params) {
         <Input 
           htmlSize={4} 
           width='4.5rem' 
-          height='4vh'
+          height='2.3rem'
           type='number'
           defaultValue={pageIndex + 1}
           onChange={e => {
@@ -414,10 +417,10 @@ function MyTbale(params) {
       </chakra.span>
       <Spacer />
       <Select 
-        width = '10vw'
-        minw='7vw'
-        fontSize='1vw'
-        height='4vh'
+        width = '10rem'
+        minw='7rem'
+        fontSize='1rem'
+        height='2.3rem'
         value={pageSize}
         onChange={e => {
           setPageSize(Number(e.target.value))
@@ -431,9 +434,9 @@ function MyTbale(params) {
       </Select>
       <Spacer />
       <Button 
-        width='4vw'
-        height='4vh'
-        fontSize='1vw'
+        width={{base: "3rem", md: "4rem"}}
+        height='2.3rem'
+        fontSize={{base: "0.8rem", md: "1rem"}}
         onClick={() => nextPage(0)} 
         disabled={!canNextPage} 
         colorScheme='teal' 
@@ -443,9 +446,9 @@ function MyTbale(params) {
       </Button>
       <Spacer />
       <Button 
-        width='4vw'
-        height='4vh'
-        fontSize='1vw'
+        width={{base: "3rem", md: "4rem"}}
+        height='2.3rem'
+        fontSize={{base: "0.8rem", md: "1rem"}}
         onClick={() => gotoPage(pageCount - 1)} 
         disabled={!canNextPage} 
         colorScheme='teal' 
@@ -454,7 +457,32 @@ function MyTbale(params) {
         末页
       </Button>
     </Flex>
-  </Center>
+    </Center>
+    <Center display={{base:"inline", md: "none"}}>
+    <chakra.span pl='2' 
+        alignSelf='center' 
+        fontSize='1rem'
+        height='2.3rem'
+        >
+        Page{' '}
+        <strong>
+          {pageIndex + 1} of {pageOptions.length}
+        </strong>{' '}
+        | Go to page:{' '}
+        <Input 
+          htmlSize={4} 
+          width='4.5rem' 
+          height='2.3rem'
+          type='number'
+          defaultValue={pageIndex + 1}
+          onChange={e => {
+            const page = e.target.value ? Number(e.target.value) - 1 : 0
+            gotoPage(page)
+          }}
+        />
+      </chakra.span>
+    </Center>
+  </SimpleGrid>
   return (
     <>
       {pageControl}
@@ -529,10 +557,16 @@ function MyTbale(params) {
                   cellDisplay=<Badge fontSize='1rem' colorScheme='green' variant='outline'>{cell.render('Cell')}</Badge> :
                   cellDisplay=<Badge fontSize='1rem' colorScheme='gray' variant='outline'>{cell.render('Cell')}</Badge>
                   else if (cell.column.isName) {
-                    cellDisplay = 
+                    cellDisplay = <>
                     <WeaponDrawer name={cell.value} hash={cell.row.values.hash}>
                       <WeaponBox data={cell.row.values} isNew={cell.row.values.createVersion === lastVersion}/>
                     </WeaponDrawer>
+                    <Link href={'/weapon/'+String(cell.row.values.hash)} passHref>
+                    <Button size='auto' width="100%" variant='ghost' display={{base: "inline", md: "none"}}>
+                      <WeaponBox data={cell.row.values} isNew={cell.row.values.createVersion === lastVersion}/>
+                    </Button>
+                    </Link>
+                    </>
                   } else if (cell.column.Header === "稀有度") {
                     cell.value === '异域' ?
                     cellDisplay=<Tag size='lg' key='lg' variant='outline' colorScheme='yellow' whiteSpace="nowrap">{cell.render('Cell')}</Tag>:
