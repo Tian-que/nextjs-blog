@@ -49,11 +49,13 @@ function DefaultColumnFilter({
   return (
     <Input
       value={filterValue || ''}
-      size='md'
+      width='auto'
       minW='100%'
+      variant='outline'
       onChange={e => {
         setFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
       }}
+      size='md'
       placeholder={`Search ${count} items...`}
     />
   )
@@ -239,7 +241,8 @@ function MyTbale(params) {
       {
         Header: '名称',
         accessor: 'name', // accessor is the "key" in the data
-        isName: true
+        isName: true,
+        isMobileDisplay: true,
       },
       {
         Header: 'hash',
@@ -458,7 +461,9 @@ function MyTbale(params) {
       <Table {...getTableProps()} variant='striped' width='60vw'>
         <Thead>
           {headerGroups.map(headerGroup => (
-            <Tr {...headerGroup.getHeaderGroupProps()}>
+            <Tr {...headerGroup.getHeaderGroupProps()}
+              display={{base: "none", md: "table-row"}}
+            >
               {headerGroup.headers.map(column => {
                 if (!column.isHidden)
                 return (
@@ -468,13 +473,36 @@ function MyTbale(params) {
                   <SimpleGrid rows={2}>
                     <Center height='7' fontSize='lg' >{column.render('Header')}</Center>
                     <Center height='1.5vh'/>
-                    <Center>{column.canFilter ? column.render('Filter') : null}</Center>
+                    <Center >{column.canFilter ? column.render('Filter') : null}</Center>
                   </SimpleGrid>
                 </Th>
               )})}
             </Tr>
           ))}
-          <Tr>
+          {headerGroups.map(headerGroup => (
+            <Tr {...headerGroup.getHeaderGroupProps()}
+            display={{base: "table-row", md: "none"}}>
+              <Th
+              colSpan={visibleColumns.length}
+              style={{
+                textAlign: 'left',
+              }}
+              >
+                <SimpleGrid>
+                  {headerGroup.headers.map(column => {
+                  if (!column.isHidden)
+                  return (
+                    <Flex pt='1'>
+                      <Center height='7' maxW='2rem' minW='20vw' fontSize='1rem' >{column.render('Header')}</Center>
+                      <Center pl='2' minW='65vw' maxH='2.3rem'>{column.canFilter ? column.render('Filter') : null}</Center>
+                    </Flex>
+                )})}
+                </SimpleGrid>
+              </Th>
+              
+            </Tr>
+          ))}
+          <Tr display={{base: "none", md: "table-row"}}>
             <Th
               colSpan={visibleColumns.length}
               style={{
@@ -534,6 +562,7 @@ function MyTbale(params) {
                   return (
                     <Td fontSize='1.4rem'
                       {...cell.getCellProps()}
+                      display={{base: cell.column.isMobileDisplay ? "table-cell":"none", md: "table-cell"}}
                     > {cellDisplay}
                     </Td>
                   )
