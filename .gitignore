@@ -34,3 +34,5 @@ yarn-error.log*
 /prisma/migrations
 /certificates
 server.js
+
+.vercel
