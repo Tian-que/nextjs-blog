@@ -2,6 +2,7 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import { extendTheme } from '@chakra-ui/react'
 import 'regenerator-runtime/runtime';
+import { SessionProvider } from "next-auth/react"
 import '../styles/App.css'
 
 const colors = {
@@ -26,12 +27,15 @@ const config = {
 
 const theme = extendTheme({ colors, config })
 
-function MyApp({ Component, pageProps }) {
+export default function MyApp({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
   return (
-    <ChakraProvider theme={theme}>
-      <Component {...pageProps} />
-    </ChakraProvider>
+    <SessionProvider session={session}>
+      <ChakraProvider theme={theme}>
+        <Component {...pageProps} />
+      </ChakraProvider>
+    </SessionProvider>
   )
 }
-
-export default MyApp

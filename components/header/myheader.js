@@ -24,6 +24,8 @@ import Fengche from "../../icons/fengcheR.svg";
 import style from "../../styles/utils.module.css"
 import Head from 'next/head'
 import Script from 'next/script'
+import { useSession, signIn, signOut } from "next-auth/react"
+
 
 export default function MyHeader() {
   const { toggleColorMode: toggleMode } = useColorMode();
@@ -40,6 +42,9 @@ export default function MyHeader() {
   }, [scrollY]);
   const cl = useColorModeValue("gray.800", "white");
   const mobileNav = useDisclosure();
+
+  const { data: session } = useSession()
+  console.log(session);
 
   const MobileNavContent = (
     <VStack
@@ -192,6 +197,23 @@ export default function MyHeader() {
               icon={<AiOutlineMenu />}
               onClick={mobileNav.onOpen}
             />
+            {session ? 
+            <Button
+              onClick={() => signIn()}
+              variant="solid"
+              colorScheme="cyan"
+              size="sm"
+            >
+              登录
+            </Button> :
+            <Button
+              onClick={() => signOut('bungie')}
+              variant="solid"
+              colorScheme="cyan"
+              size="sm"
+            >
+              登出
+            </Button>}
           </Flex>
         </Flex>
         {MobileNavContent}
