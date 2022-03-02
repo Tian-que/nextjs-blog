@@ -199,20 +199,20 @@ export default function MyHeader() {
             />
             {session ? 
             <Button
-              onClick={() => signIn()}
-              variant="solid"
-              colorScheme="cyan"
-              size="sm"
-            >
-              登录
-            </Button> :
-            <Button
               onClick={() => signOut('bungie')}
               variant="solid"
               colorScheme="cyan"
               size="sm"
             >
               登出
+            </Button>:
+            <Button
+              onClick={() => signIn()}
+              variant="solid"
+              colorScheme="cyan"
+              size="sm"
+            >
+              登录
             </Button>}
           </Flex>
         </Flex>
