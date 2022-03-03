@@ -124,9 +124,21 @@ export default NextAuth({
       authorization: "https://graph.qq.com/oauth2.0/authorize",
       token: {
         url: "https://graph.qq.com/oauth2.0/token",
-        params: {
-          client_secret: process.env.TENCENT_APP_KEY,
-          fmt: 'json'
+        async request(context) {
+          const response = await fetch('https://graph.qq.com/oauth2.0/token',{
+            method: 'POST',
+            body: new URLSearchParams({
+              grant_type: "authorization_code",
+              client_id: process.env.TENCENT_ID,
+              client_secret: process.env.TENCENT_APP_KEY,
+              code: context.params.code,
+              redirect_uri: 'https://data.tianque.top/api/auth/callback/qq',
+              // redirect_uri: context.provider.callbackUrl,
+              fmt: 'json',
+            }),
+          });
+          const tokens = await response.json()
+          return { tokens }
         },
       },
       userinfo: {
@@ -140,7 +152,6 @@ export default NextAuth({
             }),
           });
           OpenID = await response.json();
-          stdout(OpenID);
           const userInfoResponse = await fetch('https://graph.qq.com/user/get_user_info', {
             method: 'GET',
             body: new URLSearchParams({
