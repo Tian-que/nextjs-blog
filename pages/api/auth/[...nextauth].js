@@ -4,6 +4,69 @@ import BungieProvider from "next-auth/providers/bungie"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import { PrismaClient } from "@prisma/client"
 
+
+
+async function refreshBungieToken(token) {
+  try {
+    const url =
+      "https://www.bungie.net/Platform/App/OAuth/token/"
+      
+    console.log(url)
+    const response = await fetch(url, {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-API-KEY": process.env.BUNGIE_API_KEY,
+      },
+      method: "POST",
+      body: new URLSearchParams({
+        client_secret: process.env.BUNGIE_CLIENT_SECRET,
+        client_id: process.env.BUNGIE_CLIENT_ID,
+        grant_type: "refresh_token",
+        refresh_token: token.refresh_token,
+      })
+    })
+
+    const refreshedTokens = await response.json()
+
+    if (!response.ok) {
+      throw refreshedTokens
+    }
+    console.log(parseInt(Date.now()/1000), parseInt(Date.now()/1000) + refreshedTokens.expires_in)
+    const updateBungieToken = await prisma.account.update({
+      where: {
+        id: token.id
+      },
+      data: {
+        access_token: refreshedTokens.access_token,
+        expires_at: Number(parseInt(Date.now()/1000)+ refreshedTokens.expires_in),
+        refresh_token: refreshedTokens.refresh_token,
+        refresh_expires_in: refreshedTokens.refresh_expires_in
+      }
+    })
+    
+    if (!updateBungieToken) {
+      throw updateBungieToken
+    }
+    console.log(updateBungieToken)
+    return {
+      ...token,
+      refresh_token: updateBungieToken.refresh_token ?? token.refreshToken,
+      access_token: updateBungieToken.access_token,
+      expires_at: updateBungieToken.expires_at,
+      refresh_expires_in: updateBungieToken.refresh_expires_in
+    }
+  } catch (error) {
+    console.log(error)
+
+    return {
+      ...token,
+      error: "RefreshAccessTokenError",
+    }
+  }
+}
+
+
+
 const prisma = new PrismaClient()
 
 export default NextAuth({
@@ -12,7 +75,7 @@ export default NextAuth({
   providers: [
     BungieProvider({
       clientId: process.env.BUNGIE_CLIENT_ID,
-      clientSecret: process.env.BUNGIE_SECRET,
+      clientSecret: process.env.BUNGIE_CLIENT_SECRET,
       headers: {
           "X-API-KEY": process.env.BUNGIE_API_KEY
       },
@@ -72,11 +135,42 @@ export default NextAuth({
   pages: {
     signIn: '/auth/signin',
     // signOut: '/auth/signout',
-  },    
+  },
   callbacks: {
-    async session({ session, token, user }) {
-        session.user = user;
-        return session // The return type will match the one returned in `useSession()`
+    async session({ session, user }) {
+      const userInfo = await prisma.user.findUnique({
+        where: {
+          id: user.id
+        },
+        include: {
+          accounts: {
+            select: {
+              id: true, 
+              provider: true,
+              providerAccountId: true,
+              refresh_token: true,
+              access_token: true,
+              expires_at: true,
+              refresh_expires_in: true
+            }
+          }
+        }
+      })
+      userInfo.accounts= userInfo.accounts.map((account)=> {
+        if (account.provider==='bungie') {
+          console.log(Date.now(), account.expires_at*1000, (Date.now() < account.expires_at*1000))
+          if (Date.now() < account.expires_at*1000)
+            return account
+          else {
+            console.log(account)
+            return refreshBungieToken(account)
+          }
+
+        }
+        else return account
+      })
+      session.user = userInfo;
+      return session // The return type will match the one returned in `useSession()`
     },
   },
   debug: true,
