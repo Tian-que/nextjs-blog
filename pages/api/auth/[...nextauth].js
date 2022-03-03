@@ -148,7 +148,6 @@ export default NextAuth({
             method: 'GET',
             body: new URLSearchParams({
               access_token: context.tokens.access_token,
-              fmt: 'json',
             }),
           });
           OpenID = await response.json();
