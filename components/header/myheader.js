@@ -13,6 +13,14 @@ import {
   Button,
   useColorMode,
   Spacer,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Avatar,
+  Text,
+  Box,
+  MenuDivider,
 } from "@chakra-ui/react";
 import { useViewportScroll } from "framer-motion";
 import { FaGithub } from 'react-icons/fa'
@@ -25,7 +33,9 @@ import style from "../../styles/utils.module.css"
 import Head from 'next/head'
 import Script from 'next/script'
 import { useSession, signIn, signOut } from "next-auth/react"
-
+import {
+  FiChevronDown,
+} from 'react-icons/fi';
 
 export default function MyHeader() {
   const { toggleColorMode: toggleMode } = useColorMode();
@@ -44,7 +54,6 @@ export default function MyHeader() {
   const mobileNav = useDisclosure();
 
   const { data: session } = useSession()
-  console.log(session);
 
   const MobileNavContent = (
     <VStack
@@ -198,14 +207,45 @@ export default function MyHeader() {
               onClick={mobileNav.onOpen}
             />
             {session ? 
-            <Button
-              onClick={() => signOut('bungie')}
-              variant="solid"
-              colorScheme="cyan"
-              size="sm"
-            >
-              登出
-            </Button>:
+            <Flex alignItems={'center'}>
+            <Menu>
+              <MenuButton
+                py={2}
+                transition="all 0.3s"
+                _focus={{ boxShadow: 'none' }}>
+                <HStack>
+                  <Avatar
+                    size={'sm'}
+                    src={
+                      session.user.image
+                    }
+                  />
+                  <VStack
+                    display={{ base: 'none', md: 'flex' }}
+                    alignItems="flex-start"
+                    spacing="1px"
+                    ml="2">
+                    <Text fontSize="sm">{session.user.name}</Text>
+                    <Text fontSize="xs" color="gray.600">
+                      角色占位
+                    </Text>
+                  </VStack>
+                  <Box display={{ base: 'none', md: 'flex' }}>
+                    <FiChevronDown />
+                  </Box>
+                </HStack>
+              </MenuButton>
+              <MenuList
+                bg={useColorModeValue('white', 'gray.900')}
+                borderColor={useColorModeValue('gray.200', 'gray.700')}>
+                <MenuItem>个人信息</MenuItem>
+                <MenuItem>设置</MenuItem>
+                <MenuItem>消息</MenuItem>
+                <MenuDivider />
+                <MenuItem onClick={() => signOut()}>退出</MenuItem>
+              </MenuList>
+            </Menu>
+          </Flex>:
             <Button
               onClick={() => signIn()}
               variant="solid"

@@ -51,6 +51,22 @@ export default NextAuth({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
     }),
+    {
+      id: "qq",
+      name: "QQ",
+      type: "oauth",
+      authorization: "https://graph.qq.com/oauth2.0/authorize",
+      token: "https://graph.qq.com/oauth2.0/token",
+      userinfo: "https://graph.qq.com/user/get_user_info",
+      clientId: process.env.TENCENT_ID,
+
+      profile(profile) {
+        return {
+          id: profile.nickname,
+          image: profile.figureurl_qq_1,
+        }
+      },
+    }
     // ...add more providers here
   ],
   pages: {
@@ -62,5 +78,6 @@ export default NextAuth({
         session.user = user;
         return session // The return type will match the one returned in `useSession()`
     },
-},
+  },
+  debug: true,
 })
