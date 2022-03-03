@@ -125,6 +125,7 @@ export default NextAuth({
       userinfo: {
         url: "https://graph.qq.com/oauth2.0/me",
         async request(context) {
+          stdout(context)
           const response = await fetch('https://graph.qq.com/oauth2.0/me', {
             method: 'GET',
             body: new URLSearchParams({
@@ -133,6 +134,7 @@ export default NextAuth({
             })
           })
           OpenID = await response.json()
+          stdout(OpenID)
           const userInfoResponse = await fetch('https://graph.qq.com/user/get_user_info', {
             method: 'GET',
             body: new URLSearchParams({
