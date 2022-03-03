@@ -144,23 +144,21 @@ export default NextAuth({
       userinfo: {
         url: "https://graph.qq.com/oauth2.0/me",
         async request(context) {
-          console.log(context.tokens)
-          const response = await fetch('https://graph.qq.com/oauth2.0/me', {
+          const response = await fetch('https://graph.qq.com/oauth2.0/me?' + 
+          new URLSearchParams({
+            access_token: context.tokens.access_token,
+            fmt: 'json'
+          }), {
             method: 'GET',
-            params: {
-              access_token: context.tokens.access_token,
-              fmt: 'json'
-            },
           });
-          console.log(response.params)
           OpenID = await response.json();
-          const userInfoResponse = await fetch('https://graph.qq.com/user/get_user_info', {
+          const userInfoResponse = await fetch('https://graph.qq.com/user/get_user_info?' + 
+          new URLSearchParams({
+            access_token: context.tokens.access_token,
+            oauth_consumer_key: OpenID.client_id,
+            openid: OpenID.openid ,
+          }), {
             method: 'GET',
-            params: {
-              access_token: context.tokens.access_token,
-              oauth_consumer_key: OpenID.client_id,
-              openid: OpenID.openid ,
-            },
           });
           return {...await userInfoResponse.json(), openid: OpenID.openid};
         },
