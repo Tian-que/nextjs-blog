@@ -209,16 +209,6 @@ export default function MyHeader() {
               icon={<AiOutlineMenu />}
               onClick={mobileNav.onOpen}
             />
-            <Button
-              size="auto"
-              pr='1'
-              variant="ghost"
-              color="current"
-              aria-label="QQ" 
-              onClick={() => signIn('qq')}
-            >
-              <Image src={QQ} layout='fixed'/>
-            </Button>
             {session ? 
             <Flex alignItems={'center'}>
             <Menu>
@@ -259,6 +249,17 @@ export default function MyHeader() {
               </MenuList>
             </Menu>
           </Flex>:
+          <>
+              <Button
+              size="auto"
+              pr='1'
+              variant="ghost"
+              color="current"
+              aria-label="QQ" 
+              onClick={() => signIn('qq')}
+            >
+              <Image src={QQ} layout='fixed'/>
+            </Button>
             <Button
               onClick={() => signIn()}
               variant="solid"
@@ -266,7 +267,9 @@ export default function MyHeader() {
               size="sm"
             >
               登录
-            </Button>}
+            </Button>
+          </>}
+          
           </Flex>
         </Flex>
         {MobileNavContent}
