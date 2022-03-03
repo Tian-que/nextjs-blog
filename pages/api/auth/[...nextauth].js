@@ -1,6 +1,7 @@
 import NextAuth from "next-auth"
 import GithubProvider from "next-auth/providers/github"
 import BungieProvider from "next-auth/providers/bungie"
+// import TencentQQ from "next-auth/providers/tencent-qq";
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import { PrismaClient } from "@prisma/client"
 
@@ -121,42 +122,45 @@ export default NextAuth({
       name: "QQ",
       type: "oauth",
       authorization: "https://graph.qq.com/oauth2.0/authorize",
-      token: "https://graph.qq.com/oauth2.0/token",
+      token: {
+        url: "https://graph.qq.com/oauth2.0/token",
+        params: {
+          client_secret: process.env.TENCENT_APP_KEY,
+          fmt: 'json'
+        },
+      },
       userinfo: {
         url: "https://graph.qq.com/oauth2.0/me",
         async request(context) {
-          stdout(context)
           const response = await fetch('https://graph.qq.com/oauth2.0/me', {
             method: 'GET',
             body: new URLSearchParams({
               access_token: context.tokens.access_token,
               fmt: 'json',
-            })
-          })
-          OpenID = await response.json()
-          stdout(OpenID)
+            }),
+          });
+          OpenID = await response.json();
+          stdout(OpenID);
           const userInfoResponse = await fetch('https://graph.qq.com/user/get_user_info', {
             method: 'GET',
             body: new URLSearchParams({
               access_token: context.tokens.access_token,
               oauth_consumer_key: OpenID.client_id,
-              openid: OpenID.openid 
-            })
-          })
-          return {...await userInfoResponse.json(), openid: OpenID.openid}
-
-        }
+              openid: OpenID.openid ,
+            }),
+          });
+          return {...await userInfoResponse.json(), openid: OpenID.openid};
+        },
       },
-
+  
       profile(profile) {
-
         return {
           id: profile.openid,
           name: profile.nickname,
           image: profile.figureurl_qq_2 || profile.figureurl_qq_1
-        }
+        };
       },
-    }
+    },
     // ...add more providers here
   ],
   pages: {
@@ -189,7 +193,7 @@ export default NextAuth({
           if (Date.now() < account.expires_at*1000)
             return account
           else {
-            console.log(account)
+            // console.log(account)
             return refreshBungieToken(account)
           }
 

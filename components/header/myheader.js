@@ -57,7 +57,6 @@ export default function MyHeader() {
   const mobileNav = useDisclosure();
 
   const { data: session } = useSession()
-  console.log(session)
   const MobileNavContent = (
     <VStack
       pos="absolute"
