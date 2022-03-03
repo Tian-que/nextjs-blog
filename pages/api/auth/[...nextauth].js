@@ -144,6 +144,7 @@ export default NextAuth({
       userinfo: {
         url: "https://graph.qq.com/oauth2.0/me",
         async request(context) {
+          console.log(context.tokens)
           const response = await fetch('https://graph.qq.com/oauth2.0/me', {
             method: 'GET',
             body: new URLSearchParams({
