@@ -115,18 +115,43 @@ export default NextAuth({
       clientSecret: process.env.GITHUB_SECRET,
     }),
     {
+      clientId: process.env.TENCENT_ID,
+      clientSecret: process.env.TENCENT_APP_KEY,
       id: "qq",
       name: "QQ",
       type: "oauth",
       authorization: "https://graph.qq.com/oauth2.0/authorize",
       token: "https://graph.qq.com/oauth2.0/token",
-      userinfo: "https://graph.qq.com/user/get_user_info",
-      clientId: process.env.TENCENT_ID,
+      userinfo: {
+        url: "https://graph.qq.com/oauth2.0/me",
+        async request(context) {
+          const response = await fetch('https://graph.qq.com/oauth2.0/me', {
+            method: 'GET',
+            body: new URLSearchParams({
+              access_token: context.tokens.access_token,
+              fmt: 'json',
+            })
+          })
+          OpenID = await response.json()
+          const userInfoResponse = await fetch('https://graph.qq.com/user/get_user_info', {
+            method: 'GET',
+            body: new URLSearchParams({
+              access_token: context.tokens.access_token,
+              oauth_consumer_key: OpenID.client_id,
+              openid: OpenID.openid 
+            })
+          })
+          return {...await userInfoResponse.json(), openid: OpenID.openid}
+
+        }
+      },
 
       profile(profile) {
+
         return {
-          id: profile.nickname,
-          image: profile.figureurl_qq_1,
+          id: profile.openid,
+          name: profile.nickname,
+          image: profile.figureurl_qq_2 || profile.figureurl_qq_1
         }
       },
     }
