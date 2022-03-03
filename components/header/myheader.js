@@ -36,6 +36,9 @@ import { useSession, signIn, signOut } from "next-auth/react"
 import {
   FiChevronDown,
 } from 'react-icons/fi';
+import Image from "next/image";
+// import QQ from "../../icons/QQ.svg";
+import QQ from '../../public/images/QQ.png'
 
 export default function MyHeader() {
   const { toggleColorMode: toggleMode } = useColorMode();
@@ -206,6 +209,16 @@ export default function MyHeader() {
               icon={<AiOutlineMenu />}
               onClick={mobileNav.onOpen}
             />
+            <Button
+              size="auto"
+              pr='1'
+              variant="ghost"
+              color="current"
+              aria-label="QQ" 
+              onClick={() => signIn('qq')}
+            >
+              <Image src={QQ} layout='fixed'/>
+            </Button>
             {session ? 
             <Flex alignItems={'center'}>
             <Menu>
