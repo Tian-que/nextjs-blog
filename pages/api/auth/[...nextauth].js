@@ -151,7 +151,7 @@ export default NextAuth({
           }), {
             method: 'GET',
           });
-          OpenID = await response.json();
+          const OpenID = await response.json();
           const userInfoResponse = await fetch('https://graph.qq.com/user/get_user_info?' + 
           new URLSearchParams({
             access_token: context.tokens.access_token,
