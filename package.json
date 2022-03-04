@@ -15,6 +15,7 @@
     "@next-auth/prisma-adapter": "^1.0.1",
     "@prisma/client": "^3.10.0",
     "@splitbee/node": "^0.3.1",
+    "bungie-api-ts": "^4.15.0",
     "classnames": "^2.3.1",
     "date-fns": "^2.28.0",
     "framer-motion": "^6.2.8",
