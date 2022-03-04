@@ -23,16 +23,28 @@ const providerIcons = {
 
 export default function SignIn({ providers }) {
   const { data: session, status } = useSession()
-
-
+  if (status === 'loading')
+  return (
+  <Layout>
+    <MyLogin>
+      <>loading</>
+    </MyLogin>
+  </Layout>)
+  const userPrviders = session.user.accounts.map((account)=> account.provider)
   return (
     <Layout>
       <MyLogin>
-          {Object.values(providers).map((provider) => (
+          {Object.values(providers).map((provider) => {
+            let isProviderLogin = false
+            if (userPrviders.includes(provider.id)) {
+              isProviderLogin = true
+            }
+            return (
             <Center p={4}>
               <Button 
               w={'full'} 
               maxW={'md'} 
+              isDisabled = {isProviderLogin}
               colorScheme={providerIcons[provider.name].colorScheme} 
               leftIcon={providerIcons[provider.name].icon} 
               key={provider.name} 
@@ -40,12 +52,13 @@ export default function SignIn({ providers }) {
               isFullWidth>
                 <Center>
                   {(status === "authenticated") ? 
-                  <Text>绑定 {provider.name} 账户</Text> :
+                  ( (isProviderLogin) ? <Text>已绑定 {provider.name} 账户</Text>: 
+                  <Text>绑定 {provider.name} 账户</Text> ):
                   <Text>使用 {provider.name} 账户登录</Text>}
                 </Center>
               </Button>
             </Center>
-          ))}
+          )})}
       </MyLogin>
     </Layout>
   )
