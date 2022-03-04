@@ -66,7 +66,66 @@ async function refreshBungieToken(token) {
   }
 }
 
+function TencentQQ(options) {
+  return {
+    id: "qq",
+    name: "QQ",
+    type: "oauth",
+    authorization: "https://graph.qq.com/oauth2.0/authorize",
+    token: {
+      url: "https://graph.qq.com/oauth2.0/token",
+      async request(context) {
+        const response = await fetch('https://graph.qq.com/oauth2.0/token',{
+          method: 'POST',
+          body: new URLSearchParams({
+            grant_type: "authorization_code",
+            client_id: context.provider.clientId,
+            client_secret: context.provider.clientSecret,
+            code: context.params.code,
+            // redirect_uri: 'https://data.tianque.top/api/auth/callback/qq',
+            redirect_uri: context.provider.callbackUrl,
+            fmt: 'json',
+          }),
+        });
+        const tokens = await response.json()
+        return { tokens }
+      },
+    },
+    userinfo: {
+      url: "https://graph.qq.com/oauth2.0/me",
+      async request(context) {
+        const response = await fetch('https://graph.qq.com/oauth2.0/me?' + 
+        new URLSearchParams({
+          access_token: context.tokens.access_token,
+          fmt: 'json'
+        }), {
+          method: 'GET',
+        });
+        const openIDInfo = await response.json();
+        const userInfoResponse = await fetch('https://graph.qq.com/user/get_user_info?' + 
+        new URLSearchParams({
+          access_token: context.tokens.access_token,
+          oauth_consumer_key: openIDInfo.client_id,
+          openid: openIDInfo.openid ,
+        }), {
+          method: 'GET',
+        });
+        return {...await userInfoResponse.json(), openid: openIDInfo.openid};
+      },
+    },
 
+    profile(profile) {
+      return {
+        id: profile.openid,
+        name: profile.nickname,
+        email: null,
+        image: profile.figureurl_qq_2 || profile.figureurl_qq_1
+      };
+    },
+
+    options
+  };
+}
 
 const prisma = new PrismaClient()
 
@@ -100,7 +159,7 @@ export default NextAuth({
               return await response.json();
           }
       },
-      profile(profile, tokens) {
+      profile(profile) {
           const { bungieNetUser: user } = profile.Response;
           return {
               id: user.membershipId,
@@ -115,63 +174,63 @@ export default NextAuth({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
     }),
-    {
+    TencentQQ({
       clientId: process.env.TENCENT_ID,
       clientSecret: process.env.TENCENT_APP_KEY,
-      id: "qq",
-      name: "QQ",
-      type: "oauth",
-      authorization: "https://graph.qq.com/oauth2.0/authorize",
-      token: {
-        url: "https://graph.qq.com/oauth2.0/token",
-        async request(context) {
-          const response = await fetch('https://graph.qq.com/oauth2.0/token',{
-            method: 'POST',
-            body: new URLSearchParams({
-              grant_type: "authorization_code",
-              client_id: process.env.TENCENT_ID,
-              client_secret: process.env.TENCENT_APP_KEY,
-              code: context.params.code,
-              redirect_uri: 'https://data.tianque.top/api/auth/callback/qq',
-              // redirect_uri: context.provider.callbackUrl,
-              fmt: 'json',
-            }),
-          });
-          const tokens = await response.json()
-          return { tokens }
-        },
-      },
-      userinfo: {
-        url: "https://graph.qq.com/oauth2.0/me",
-        async request(context) {
-          const response = await fetch('https://graph.qq.com/oauth2.0/me?' + 
-          new URLSearchParams({
-            access_token: context.tokens.access_token,
-            fmt: 'json'
-          }), {
-            method: 'GET',
-          });
-          const OpenID = await response.json();
-          const userInfoResponse = await fetch('https://graph.qq.com/user/get_user_info?' + 
-          new URLSearchParams({
-            access_token: context.tokens.access_token,
-            oauth_consumer_key: OpenID.client_id,
-            openid: OpenID.openid ,
-          }), {
-            method: 'GET',
-          });
-          return {...await userInfoResponse.json(), openid: OpenID.openid};
-        },
-      },
-  
-      profile(profile) {
-        return {
-          id: profile.openid,
-          name: profile.nickname,
-          image: profile.figureurl_qq_2 || profile.figureurl_qq_1
-        };
-      },
-    },
+    })
+    // {
+    //   id: "qq",
+    //   name: "QQ",
+    //   type: "oauth",
+    //   authorization: "https://graph.qq.com/oauth2.0/authorize",
+    //   token: {
+    //     url: "https://graph.qq.com/oauth2.0/token",
+    //     async request(context) {
+    //       const response = await fetch('https://graph.qq.com/oauth2.0/token',{
+    //         method: 'POST',
+    //         body: new URLSearchParams({
+    //           grant_type: "authorization_code",
+    //           client_id: context.provider.clientId,
+    //           client_secret: context.provider.clientSecret,
+    //           code: context.params.code,
+    //           redirect_uri: context.provider.callbackUrl,
+    //           fmt: 'json',
+    //         }),
+    //       });
+    //       const tokens = await response.json()
+    //       return { tokens }
+    //     },
+    //   },
+    //   userinfo: {
+    //     url: "https://graph.qq.com/oauth2.0/me",
+    //     async request(context) {
+    //       const response = await fetch('https://graph.qq.com/oauth2.0/me?' + 
+    //       new URLSearchParams({
+    //         access_token: context.tokens.access_token,
+    //         fmt: 'json'
+    //       }), {
+    //         method: 'GET',
+    //       });
+    //       const openIDInfo = await response.json();
+    //       const userInfoResponse = await fetch('https://graph.qq.com/user/get_user_info?' + 
+    //       new URLSearchParams({
+    //         access_token: context.tokens.access_token,
+    //         oauth_consumer_key: openIDInfo.client_id,
+    //         openid: openIDInfo.openid ,
+    //       }), {
+    //         method: 'GET',
+    //       });
+    //       return {...await userInfoResponse.json(), openid: OpenID.openid};
+    //     },
+    //   },
+    //   profile(profile) {
+    //     return {
+    //       id: profile.openid,
+    //       name: profile.nickname,
+    //       image: profile.figureurl_qq_2 || profile.figureurl_qq_1
+    //     };
+    //   },
+    // },
     // ...add more providers here
   ],
   pages: {
