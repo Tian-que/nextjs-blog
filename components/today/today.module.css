@@ -20,3 +20,8 @@
   color: rgb(237, 237, 237);
   opacity: 0.48;
 }
+
+@font-face {
+  font-family: Destiny2;
+  src: url("../../fonts/destiny2.otf") format("opentype");
+}
