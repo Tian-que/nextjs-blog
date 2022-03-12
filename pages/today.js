@@ -16,17 +16,24 @@ export default function Login() {
     {
       name: "烈日",
       icon: "https://bungie.net/common/destiny2_content/icons/DestinyDamageTypeDefinition_2a1773e10968f2d088b97c22b22bba9e.png",
-      count: 3,
+      count: 8,
     },
     {
       name: "电弧",
       icon: "https://bungie.net/common/destiny2_content/icons/DestinyDamageTypeDefinition_092d066688b879c807c3b460afdd61e6.png",
-      count: 5,
+      count: 2,
+    },
+  ]
+  const shieldDatasDS = [
+    {
+      name: "烈日",
+      icon: "https://bungie.net/common/destiny2_content/icons/DestinyDamageTypeDefinition_2a1773e10968f2d088b97c22b22bba9e.png",
+      count: 8,
     },
     {
-      name: "虚空",
-      icon: "https://bungie.net/common/destiny2_content/icons/DestinyDamageTypeDefinition_ceb2f6197dccf3958bb31cc783eb97a0.png",
-      count: 7,
+      name: "电弧",
+      icon: "https://bungie.net/common/destiny2_content/icons/DestinyDamageTypeDefinition_092d066688b879c807c3b460afdd61e6.png",
+      count: 1,
     },
   ]
   const championDatas = [
@@ -38,7 +45,69 @@ export default function Login() {
     {
       name: "过载勇士",
       icon: "https://www.bungie.net/common/destiny2_content/icons/c4d9c4f1ec3167e272286bb155dc15f4.png",
-      count: 3,
+      count: 2,
+    },
+  ]
+  const championDatasDS = [
+    {
+      name: "屏障勇士",
+      icon: "https://www.bungie.net/common/destiny2_content/icons/2ac9bcf4a961c3b3e31da7b76a5a87f9.png",
+      count: 4,
+    },
+    {
+      name: "过载勇士",
+      icon: "https://www.bungie.net/common/destiny2_content/icons/c4d9c4f1ec3167e272286bb155dc15f4.png",
+      count: 6,
+    },
+  ]
+  const banxiDatas = [
+    {
+      name: '平衡枪托',
+      type: '武器模组',
+      icon: 'https://www.bungie.net/common/destiny2_content/icons/c537bdf090f114963cce60636c98d7c2.jpg',
+      perks: [
+        {
+          name: '平衡枪托',
+          description: '降低武器的后坐力偏转。',
+          icon: 'https://www.bungie.net/common/destiny2_content/icons/1a61b0f2c0c1707a0d53b90264f84a3d.png'
+        }
+      ]
+    },
+    {
+      name: '小型规格',
+      type: '武器模组',
+      icon: 'https://www.bungie.net/common/destiny2_content/icons/02c21091a41663aeaff7e26ab233bc20.jpg',
+      perks: [
+        {
+          name: '小型规格',
+          description: '对普通敌人造成额外伤害。',
+          icon: 'https://www.bungie.net/common/destiny2_content/icons/0a4ec1d5bb185c972f9bbdf4ebecedc5.png'
+        }
+      ]
+    },
+    {
+      name: '瞄准协调器',
+      type: '武器模组',
+      icon: 'https://www.bungie.net/common/destiny2_content/icons/34959be63128a82fe6382b800b2d775d.jpg',
+      perks: [
+        {
+          name: '瞄准协调器',
+          description: '武器具有更好的目标获取能力。',
+          icon: 'https://www.bungie.net/common/destiny2_content/icons/ecd83da9150cf023cbc859b2c8331f2c.png'
+        }
+      ]
+    },
+    {
+      name: '蜻蜓规格',
+      type: '武器模组',
+      icon: 'https://www.bungie.net/common/destiny2_content/icons/bb2c1c71fa26132557b1e75515df8c45.jpg',
+      perks: [
+        {
+          name: '蜻蜓规格',
+          description: '提高蜻蜓的爆炸范围和伤害。',
+          icon: 'https://www.bungie.net/common/destiny2_content/icons/86c5f912278f57c5089039f9425969c3.png'
+        }
+      ]
     },
   ]
 
@@ -195,12 +264,12 @@ export default function Login() {
               </Box>
             </Box>
           </Box>
-          <Center mt='1.3vw' w='100%' h='4.9vw' bg='#513065' >
+          <Center mt='1.3vw' w='100%' h='5.2vw' bg='#513065' >
             <chakra.span pl='3vw' fontSize='3vw' fontWeight='bold' opacity='0.83' >传说遗失区域</chakra.span>
             <Spacer />
             <Box pr='3vw' h='100%' lineHeight='1.3' textAlign='right' pt='0.3vw'>
-              <chakra.span fontSize='1.5vw' pb='0' className={style.opacityText}>光等</chakra.span>
-              <Flex fontSize='1.8vw' pt='0' fontFamily='Destiny2'>
+              <chakra.span fontSize='1.7vw' pb='0' className={style.opacityText}>光等</chakra.span>
+              <Flex fontSize='2vw' pt='0' fontFamily='Destiny2'>
                 <chakra.span color='#c3a019'></chakra.span>
                 <chakra.span>1550</chakra.span>
               </Flex>
@@ -293,12 +362,178 @@ export default function Login() {
               </Grid>
             </Flex>
           </Box>
+
+          <Center mt='1.3vw' w='100%' h='5.2vw' bg='#c3a019' >
+            <chakra.span pl='3vw' fontSize='3vw' fontWeight='bold' opacity='0.83' >大师遗失区域</chakra.span>
+            <Spacer />
+            <Box pr='3vw' h='100%' lineHeight='1.3' textAlign='right' pt='0.3vw'>
+              <chakra.span fontSize='1.7vw' pb='0' className={style.opacityText}>光等</chakra.span>
+              <Flex fontSize='2vw' pt='0' fontFamily='Destiny2'>
+                <chakra.span color='#c3a019'></chakra.span>
+                <chakra.span>1580</chakra.span>
+              </Flex>
+            </Box>
+          </Center>
+          <Divider pt='1.3vw' opacity='0.3'/>
+          <Flex pt='2vw' w='100%'  h='16vw'>
+            <Box w='42%'>
+              <chakra.span fontSize='2.5vw' className={style.opacityText}># 护盾</chakra.span>
+              <Flex h='10vw' pt='2vw' >
+                {shieldDatasDS.map((shieldData) => (
+                  <Box
+                    w='8.2vw'
+                    h='100%'
+                    bgRepeat='no-repeat'
+                    mr='3vw'
+                    bgImg={'linear-gradient(90deg, rgba(14,21,27,60%) 0%, rgba(14,21,27,60%) 80%), url("'+ shieldData.icon + '")'}
+                    bgSize='6.2vw'
+                    verticalAlign='bottom'
+                    key={shieldData.name}
+                  > 
+                    <Box pl='3.3vw' pt='2.5vw' fontSize='3vw'><chakra.span fontStyle='italic'>x</chakra.span><chakra.span fontWeight='bold' fontSize='3.5vw'>{shieldData.count}</chakra.span></Box>
+                  </Box>
+                ))}
+              </Flex>
+            </Box>
+            <Box w='58%'>
+              <chakra.span fontSize='2.5vw' className={style.opacityText}># 勇士</chakra.span>
+              <Flex pl='1vw' h='10vw' pt='2vw' >
+                {championDatasDS.map((championData) => (
+                  <Box
+                    w='23vw'
+                    h='100%'
+                    bgRepeat='no-repeat'
+                    bgImg={'linear-gradient(90deg, rgba(14,21,27,60%) 0%, rgba(14,21,27,60%) 80%), url("'+ championData.icon + '")'}
+                    bgSize='6.2vw'
+                    verticalAlign='bottom'
+                    key={championData.name}
+                    mr='1.8vw'
+                  > 
+                    <Flex>
+                      <Box pl='3.3vw' pt='2.5vw' fontSize='3vw'><chakra.span fontStyle='italic'>x</chakra.span><chakra.span fontWeight='bold' fontSize='3.5vw'>{championData.count}</chakra.span></Box>
+                      <Box pt='1vw' pl='1.3vw' width='auto'><chakra.span fontWeight='light' fontSize='2.7vw'>{championData.name}</chakra.span></Box>
+                    </Flex>
+                  </Box>
+                ))}
+              </Flex>
+            </Box>
+          </Flex>
+          <Divider pt='1.3vw' opacity='0.3'/>
+          <Box pt='2vw'>
+            <Box w='100%'><chakra.span fontSize='2.5vw' className={style.opacityText}>修改器</chakra.span></Box>
+            <Flex pt='2vw'>
+              <Grid w='50%'>
+                {leftDSM.map((data) => (
+                  <Flex h='15vw'>
+                    <Box 
+                    w='6.2vw'
+                    h='6.2vw'
+                    bgRepeat='no-repeat'
+                    bgImg={'url("https://www.bungie.net/'+ data.icon + '")'}
+                    bgSize='6.2vw'
+                    />
+                    <Box pl='2vw' maxW='35vw'>
+                      {data.name.endsWith('焦痕') ? 
+                      <Text fontSize='3vw' lineHeight='1.2' color={jiaohenColor[data.name.slice(0,2)]} isTruncated>{data.name}</Text> :
+                      <Text fontSize='3vw' lineHeight='1.2' isTruncated>{data.name}</Text>}
+                      <Text color='darkgrey' fontSize='2vw' whiteSpace='pre-wrap' >{data.description}</Text>
+                    </Box>
+                  </Flex>
+                ))}
+              </Grid>
+              
+              <Grid w='50%'>
+              {rightDSM.map((data) => (
+                  <Flex h='15vw'>
+                    <Box 
+                    w='6.2vw'
+                    h='6.2vw'
+                    bgRepeat='no-repeat'
+                    bgImg={'url("https://www.bungie.net/'+ data.icon + '")'}
+                    bgSize='6.2vw'
+                    />
+                    <Box pl='2vw' maxW='35vw'>
+                      <Text fontSize='3vw'  lineHeight='1.2' isTruncated>{data.name}</Text>
+                      <Text color='darkgrey' fontSize='2vw' whiteSpace='pre-wrap' >{data.description}</Text>
+                    </Box>
+                  </Flex>
+                ))}
+              </Grid>
+            </Flex>
+          </Box>
         </Center>
-        <Center pt='1vw' height='80vw' display='block'>
-          {/* <Divider orientation='horizontal' /> */}
-        </Center>
-        <Center>
-          <Box width='80%'>456</Box>
+        <Divider orientation='horizontal' pt='0.3vw' opacity='0.4'/>
+        <Center pt='3.5vw' display='grid'>
+          <Box 
+            width='85vw' 
+            h='17vw' 
+            borderColor='rgb(60,60,60)' 
+            borderWidth='0.2vw' 
+            borderRadius='sm'
+            bgImg={'linear-gradient(90deg, rgb(14, 21, 27) 0%, rgba(0,0,0,0.5) 25%), url("https://bungie.net/common/destiny2_content/icons/3142923bc72bcd5a769badc26bd8b508.jpg")'}
+            bgSize='60vw'
+            bgClip='content-box'
+            bgPos='25vw center'
+            bgRepeat='no-repeat'
+            // bgGradient='linear(to-r, rgba(14, 21, 27, 1) 40%, rgba(14, 21, 27, 0))'
+          >
+            <Box
+              w='100%'
+              h='100%'
+              // bgRepeat='no-repeat'
+              // bgSize='15vw'
+              // bgPos = '3vw'
+              // bgImg={'linear-gradient(90deg, rgba(14,21,27,90%) 0%, rgba(14,21,27,90%) 80%), url("https://bungie.net/common/destiny2_content/icons/DestinyActivityModeDefinition_7d11acd7d5a3daebc0a0c906452932d6.png")'}
+            >
+              <Box pl='3vw' pt='2vw'>
+                <Text fontSize='2vw' fontWeight='light' className={style.opacityText}>枪匠</Text>
+                <Divider opacity='0.3' pt='0.4vw' w='30vw'/>
+                <Text fontSize='5vw' lineHeight='1.3' fontWeight='light' >班西-44</Text>
+                <Flex>
+                  <ChakraImage w='3vw' className={style.opacityText} src='https://bungie.net/common/destiny2_content/icons/c60303e278aa5fc566a04e98c3d8024c.png' />
+                  <Text fontSize='2vw' fontWeight='light' className={style.opacityText}>高塔 · 地球，最后的城市</Text>
+                </Flex>
+              </Box>
+            </Box>
+          </Box>
+          <Divider pt='1.3vw' opacity='0.3'/>
+          <Box pt='2vw'>
+            <Box w='100%'><chakra.span fontSize='2.5vw' className={style.opacityText}>模组</chakra.span></Box>
+            <Grid pt='2vw' pl='2vw'>
+              {banxiDatas.map((data) => (<Flex pl='0.2vw' pt='0.2vw' >
+                <Box 
+                  width='6.2vw' 
+                  h='6.2vw' 
+                  borderColor='rgb(145,145,145)' 
+                  borderWidth='0.2vw' 
+                  borderRadius='sm'
+                  mb='2vw'
+                >
+                  <ChakraImage boxSize='5.8vw' src={data.icon}/>
+                </Box>
+                <Box pl='2vw' maxW='36vw'>
+                  <Text fontSize='3vw' lineHeight='1.2' isTruncated>{data.name}</Text>
+                  <Text color='darkgrey' fontSize='2vw' whiteSpace='pre-wrap' >{data.type}</Text>
+                </Box>
+                <Spacer ><Divider ml='10%' variant='dashed' mt='10%' w='80%'/></Spacer>
+                <Box w='35vw'>
+                {data.perks.map((perk) => (<Flex>
+                    <Box>
+                      <ChakraImage boxSize='5.2vw' src={perk.icon}/>
+                    </Box>
+                    <Box pl='2vw' maxW='36vw'>
+                      <Text fontSize='2.6vw' lineHeight='1.2' isTruncated>{perk.name}</Text>
+                      <Text color='darkgrey' fontSize='1.8vw' whiteSpace='pre-wrap' >{perk.description}</Text>
+                    </Box>
+                  </Flex>))}
+                  
+                </Box>
+              </Flex>))}
+              
+            </Grid>
+          </Box>
+
+          
         </Center>
       </Box>
     </Center>
