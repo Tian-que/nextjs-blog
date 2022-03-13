@@ -232,7 +232,7 @@ export default function Login() {
         </Center>
         <Divider orientation='horizontal' pt='0.3vw' opacity='0.4'/>
         <Center pt='3.5vw' display='grid'>
-          <Box 
+          <Flex 
             width='85vw' 
             h='17vw' 
             borderColor='rgb(60,60,60)' 
@@ -246,7 +246,7 @@ export default function Login() {
             // bgGradient='linear(to-r, rgba(14, 21, 27, 1) 40%, rgba(14, 21, 27, 0))'
           >
             <Box
-              w='100%'
+              maxW='40%'
               h='100%'
               bgRepeat='no-repeat'
               bgSize='15vw'
@@ -255,7 +255,7 @@ export default function Login() {
             >
               <Box pl='3vw' pt='2vw'>
                 <Text fontSize='2vw' fontWeight='light' className={style.opacityText}>遗失区域</Text>
-                <Divider opacity='0.3' pt='0.4vw' w='35vw'/>
+                <Divider opacity='0.3' pt='0.4vw' />
                 <Text fontSize='5vw' lineHeight='1.3' fontWeight='light' >K1后勤区</Text>
                 <Flex>
                   <ChakraImage w='3vw' className={style.opacityText} src='https://bungie.net/common/destiny2_content/icons/c60303e278aa5fc566a04e98c3d8024c.png' />
@@ -263,7 +263,19 @@ export default function Login() {
                 </Flex>
               </Box>
             </Box>
-          </Box>
+            <Spacer><Center pl='10%' h='100%'><Divider variant='dashed'/></Center></Spacer>
+            <Box w='30%'>
+              <Flex pt='25%'>
+                <Box>
+                  <ChakraImage boxSize='5.2vw' src={'https://bungie.net/common/destiny2_content/icons/763634b78eb22168ac707500588b7333.jpg'}/>
+                </Box>
+                <Box pl='5%' lineHeight='1.2' maxW='100%'>
+                  <Text color='lightgrey' fontWeight='light' fontSize='1.8vw' >如若单人</Text>
+                  <Text fontSize='2.6vw' color='#c3a019' fontWeight='bold' lineHeight='1.2' >异域腿甲</Text>
+                </Box>
+              </Flex>
+            </Box>
+          </Flex>
           <Center mt='1.3vw' w='100%' h='5.6vw' bg='#513065' >
             <chakra.span pl='3vw' fontSize='3vw' fontWeight='bold' opacity='0.83' >传说遗失区域</chakra.span>
             <Spacer />
