@@ -422,7 +422,7 @@ export default function Login() {
               </Flex>
             </Box>
           </Flex>
-          <Divider pt='1.3vw' opacity='0.3'/>
+          <Divider pt='1rem' opacity='0.3'/>
           <Box pt='2vw'>
             <Box w='100%'><chakra.span fontSize='2.5vw' className={style.opacityText}>修改器</chakra.span></Box>
             <Flex pt='2vw'>
