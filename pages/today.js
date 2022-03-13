@@ -267,9 +267,9 @@ export default function Login() {
           <Center mt='1.3vw' w='100%'  bg='#513065' >
             <chakra.span pl='3vw' fontSize='3vw' fontWeight='bold' opacity='0.83' >传说遗失区域</chakra.span>
             <Spacer />
-            <Box pr='3vw' h='100%' lineHeight='1.3' textAlign='right' pt='0.3vw'>
-              <chakra.span fontSize='1.7vw' pb='0' className={style.opacityText}>光等</chakra.span>
-              <Flex fontSize='2vw' pt='0' fontFamily='Destiny2'>
+            <Box pr='3vw' h='100%'  textAlign='right' >
+              <chakra.span fontSize='2vw' pb='0' className={style.opacityText}>光等</chakra.span>
+              <Flex fontSize='2.3vw' pt='0' fontFamily='Destiny2'>
                 <chakra.span color='#c3a019'></chakra.span>
                 <chakra.span>1550</chakra.span>
               </Flex>
@@ -363,13 +363,13 @@ export default function Login() {
             </Flex>
           </Box>
 
-          <Center mt='1.3vw' w='100%' h='5.2vw' bg='#c3a019' >
+          <Center mt='1.3vw' w='100%' bg='#c3a019' >
             <chakra.span pl='3vw' fontSize='3vw' fontWeight='bold' opacity='0.83' >大师遗失区域</chakra.span>
             <Spacer />
-            <Box pr='3vw' h='100%' lineHeight='1.3' textAlign='right' pt='0.3vw'>
-              <chakra.span fontSize='1.7vw' pb='0' className={style.opacityText}>光等</chakra.span>
-              <Flex fontSize='2vw' pt='0' fontFamily='Destiny2'>
-                <chakra.span color='#c3a019'></chakra.span>
+            <Box pr='3vw' h='100%'  textAlign='right' >
+              <chakra.span fontSize='2vw' pb='0' opacity='0.6' className={style.opacityText}>光等</chakra.span>
+              <Flex fontSize='2.3vw' pt='0' fontFamily='Destiny2'>
+                <chakra.span ></chakra.span>
                 <chakra.span>1580</chakra.span>
               </Flex>
             </Box>
