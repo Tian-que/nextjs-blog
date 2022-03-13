@@ -204,8 +204,8 @@ export default function Login() {
                      {'frames': ['/common/destiny2_content/icons/efc32267a9f1c53719c88d02a23d5b36.png']}],
   'name': '勇士：暴徒'}]
   const dsmHalf = Math.ceil(dsm.length / 2)
-  const leftDSM = csm.slice(0, dsmHalf)
-  const rightDSM = csm.slice(-dsmHalf)
+  const leftDSM = dsm.slice(0, dsmHalf)
+  const rightDSM = dsm.slice(-dsmHalf)
 
   
 
@@ -264,7 +264,7 @@ export default function Login() {
               </Box>
             </Box>
           </Box>
-          <Center mt='1.3vw' w='100%' h='5.2vw' bg='#513065' >
+          <Center mt='1.3vw' w='100%'  bg='#513065' >
             <chakra.span pl='3vw' fontSize='3vw' fontWeight='bold' opacity='0.83' >传说遗失区域</chakra.span>
             <Spacer />
             <Box pr='3vw' h='100%' lineHeight='1.3' textAlign='right' pt='0.3vw'>
@@ -424,13 +424,14 @@ export default function Login() {
             <Flex pt='2vw'>
               <Grid w='50%'>
                 {leftDSM.map((data) => (
-                  <Flex h='15vw'>
+                  <Flex h='16vw'>
                     <Box 
                     w='6.2vw'
                     h='6.2vw'
                     bgRepeat='no-repeat'
                     bgImg={'url("https://www.bungie.net/'+ data.icon + '")'}
                     bgSize='6.2vw'
+                    key={data.name}
                     />
                     <Box pl='2vw' maxW='35vw'>
                       {data.name.endsWith('焦痕') ? 
@@ -451,6 +452,7 @@ export default function Login() {
                     bgRepeat='no-repeat'
                     bgImg={'url("https://www.bungie.net/'+ data.icon + '")'}
                     bgSize='6.2vw'
+                    key={data.name}
                     />
                     <Box pl='2vw' maxW='35vw'>
                       <Text fontSize='3vw'  lineHeight='1.2' isTruncated>{data.name}</Text>
