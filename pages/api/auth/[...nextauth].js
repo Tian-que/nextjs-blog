@@ -6,67 +6,6 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import { PrismaClient } from "@prisma/client"
 import { refreshBungieToken } from "../../../lib/getBungieToken.js"
 
-
-
-// async function refreshBungieToken(token) {
-//   try {
-//     const url =
-//       "https://www.bungie.net/Platform/App/OAuth/token/"
-      
-//     console.log(url)
-//     const response = await fetch(url, {
-//       headers: {
-//         "Content-Type": "application/x-www-form-urlencoded",
-//         "X-API-KEY": process.env.BUNGIE_API_KEY,
-//       },
-//       method: "POST",
-//       body: new URLSearchParams({
-//         client_secret: process.env.BUNGIE_CLIENT_SECRET,
-//         client_id: process.env.BUNGIE_CLIENT_ID,
-//         grant_type: "refresh_token",
-//         refresh_token: token.refresh_token,
-//       })
-//     })
-
-//     const refreshedTokens = await response.json()
-
-//     if (!response.ok) {
-//       throw refreshedTokens
-//     }
-//     console.log(parseInt(Date.now()/1000), parseInt(Date.now()/1000) + refreshedTokens.expires_in)
-//     const updateBungieToken = await prisma.account.update({
-//       where: {
-//         id: token.id
-//       },
-//       data: {
-//         access_token: refreshedTokens.access_token,
-//         expires_at: Number(parseInt(Date.now()/1000)+ refreshedTokens.expires_in),
-//         refresh_token: refreshedTokens.refresh_token,
-//         refresh_expires_in: refreshedTokens.refresh_expires_in
-//       }
-//     })
-    
-//     if (!updateBungieToken) {
-//       throw updateBungieToken
-//     }
-//     console.log(updateBungieToken)
-//     return {
-//       ...token,
-//       refresh_token: updateBungieToken.refresh_token ?? token.refreshToken,
-//       access_token: updateBungieToken.access_token,
-//       expires_at: updateBungieToken.expires_at,
-//       refresh_expires_in: updateBungieToken.refresh_expires_in
-//     }
-//   } catch (error) {
-//     console.log(error)
-
-//     return {
-//       ...token,
-//       error: "RefreshAccessTokenError",
-//     }
-//   }
-// }
-
 function TencentQQ(options) {
   return {
     id: "qq",
