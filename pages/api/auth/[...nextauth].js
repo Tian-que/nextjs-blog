@@ -22,7 +22,6 @@ function TencentQQ(options) {
             client_id: context.provider.clientId,
             client_secret: context.provider.clientSecret,
             code: context.params.code,
-            // redirect_uri: 'https://data.tianque.top/api/auth/callback/qq',
             redirect_uri: context.provider.callbackUrl,
             fmt: 'json',
           }),

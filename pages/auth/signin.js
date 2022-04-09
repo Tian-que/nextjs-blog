@@ -30,7 +30,10 @@ export default function SignIn({ providers }) {
       <>loading</>
     </MyLogin>
   </Layout>)
-  const userPrviders = session.user.accounts.map((account)=> account.provider)
+  let userPrviders = []
+  if (session) {
+    userPrviders = session.user.accounts.map((account)=> account.provider)
+  }
   return (
     <Layout>
       <MyLogin>
