@@ -657,7 +657,7 @@ export default function today({todayData}) {
         bgSize='contain' 
         bgRepeat='no-repeat' 
         padding='0rem 0px 0px' 
-        bgImage={'linear-gradient(rgba(0,0,0,0) 41vw, rgba(14, 21, 27, 1) 44.7vw), url("https://images.contentstack.io/v3/assets/blte410e3b15535c144/blt58ebe92f5c2985f3/620be743510c6b1c87b8a9d7/story-bg.jpg")'}
+        bgImage={'linear-gradient(rgba(0,0,0,0) 41vw, rgba(14, 21, 27, 1) 44.7vw), url("https://web-static.neshpub.com/destiny2/image/SeasonOfTheHaunted/mobile/s17-leviathan-bg-mobile.jpg")'}
       >
         <TodayHeader seasonInfo={todayData.seasonInfo} />
         <LostSector lostSectorInfo={todayData.losts} />
