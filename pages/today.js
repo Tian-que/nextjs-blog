@@ -660,7 +660,7 @@ export default function today({todayData}) {
         bgImage={'linear-gradient(rgba(0,0,0,0) 41vw, rgba(14, 21, 27, 1) 44.7vw), url("https://web-static.neshpub.com/destiny2/image/SeasonOfTheHaunted/mobile/s17-leviathan-bg-mobile.jpg")'}
       >
         <TodayHeader seasonInfo={todayData.seasonInfo} />
-        <LostSector lostSectorInfo={todayData.losts} />
+        {todayData.losts ? <LostSector lostSectorInfo={todayData.losts} /> : ''}
         <Activitys activitys = {todayData.activitys} />
         <Center><Divider w='90%' orientation='horizontal' pt='0.3vw' opacity='0.4'/></Center>
         <Vendors vendorsInfo={todayData.vendorsInfo} />
