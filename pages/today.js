@@ -653,7 +653,7 @@ function TQInfo () {
   return (
     <div style={{padding: "10px 0px 10px 30px", background: "hsl(0deg 0% 100% / 0%)"}}>
       <span style={{color: "lightgray", fontWeight: "lighter", margin: "0px", fontSize: "14px", paddingRight: "20px"}}>https://data.tianque.top/today</span>
-      <span style={{color: "lightgray", fontWeight: "lighter", margin: "0px", fontSize: "22px", paddingRight: "30px", float:"right"}}>Design By @天阙</span>
+      <span style={{color: "lightgray", fontWeight: "lighter", margin: "0px", fontSize: "14px", paddingRight: "30px", float:"right"}}>Design By @天阙</span>
     </div>
   )
 }
