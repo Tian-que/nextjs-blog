@@ -649,6 +649,15 @@ function VendorImgCard({vendorInfo}) {
   )
 }
 
+function TQInfo () {
+  return (
+    <div style={{padding: "10px 0px 10px 30px", background: "hsl(0deg 0% 100% / 0%)"}}>
+      <span style={{color: "lightgray", fontWeight: "lighter", margin: "0px", fontSize: "14px", paddingRight: "20px"}}>https://data.tianque.top/today</span>
+      <span style={{color: "lightgray", fontWeight: "lighter", margin: "0px", fontSize: "22px", paddingRight: "30px", float:"right"}}>Design By @天阙</span>
+    </div>
+  )
+}
+
 function Today({todayData}) {
   return (
     <Center bg='rgb(14, 21, 27)' width='100vw' color='white'>
@@ -665,7 +674,7 @@ function Today({todayData}) {
         <Activitys activitys = {todayData.activitys} />
         <Center><Divider w='90%' orientation='horizontal' pt='0.3vw' opacity='0.4'/></Center>
         <Vendors vendorsInfo={todayData.vendorsInfo} />
-        <Box h='10vw' />
+        <TQInfo />
       </Box>
     </Center>
   )
