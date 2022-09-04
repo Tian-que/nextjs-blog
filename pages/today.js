@@ -6,6 +6,7 @@ import style from '../components/today/today.module.css'
 import { cs } from "date-fns/locale"
 import { SP } from "next/dist/shared/lib/utils"
 import React from "react"
+import { getTodayData } from "../lib/today.js"
 
 const jiaohenColor = {
   烈日: 'rgb(240,99,30)',
@@ -648,7 +649,7 @@ function VendorImgCard({vendorInfo}) {
   )
 }
 
-export default function today({todayData}) {
+function Today({todayData}) {
   return (
     <Center bg='rgb(14, 21, 27)' width='100vw' color='white'>
       <Box  
@@ -670,13 +671,23 @@ export default function today({todayData}) {
   )
 }
 
-// This is the recommended way for Next.js 9.3 or newer
-export async function getServerSideProps() {
-  const res = await fetch(process.env.API_PATH + "destiny2/today/tjson")
-  const todayData = await res.json()
-  return {
-    props: {
-      todayData
-    },
-  }
+export default function GetTodayReport() {
+  const { todayData, isLoading, isError } = getTodayData()
+  if (isLoading) return <div>Loading...</div>
+  if (isError) return <div>Failed to load</div>
+  return <Today todayData={todayData} />
 }
+
+// export default function WeaponTable() {
+//   return (
+//     <Layout>
+//       <Center maxW='100%' mt='10'>
+//           <Box maxW='100%' height='85vh' borderWidth='1px' borderRadius='lg' textAlign='center' overflowY='auto'>
+//             {/* <Scrollbars style={{width: '100vh'}}> */}
+//               <GetTable />
+//             {/* </Scrollbars> */}
+//           </Box>
+//       </Center>
+//     </Layout>
+//   )
+// }
