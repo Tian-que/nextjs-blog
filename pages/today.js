@@ -672,10 +672,10 @@ function Today({todayData}) {
 }
 
 export default function GetTodayReport() {
-  const { todayData, isLoading, isError } = getTodayData()
+  const { data, isLoading, isError } = getTodayData()
   if (isLoading) return <div>Loading...</div>
   if (isError) return <div>Failed to load</div>
-  return <Today todayData={todayData} />
+  return <Today todayData={data} />
 }
 
 // export default function WeaponTable() {
