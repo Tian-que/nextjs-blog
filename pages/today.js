@@ -654,7 +654,7 @@ function TQInfo () {
     <div style={{padding: "10px 110px 10px 140px", fontSize: "1.3vw", background: "hsl(0deg 0% 100% / 0%)"}}>
       <span style={{color: "lightgray", fontWeight: "lighter", margin: "0px", paddingRight: "20px"}}>Source: https://data.tianque.top/today</span>
       <span style={{color: "lightgray", fontWeight: "lighter", margin: "0px", paddingRight: "30px", float:"right"}}>Design By @天阙</span>
-      <span style={{color: "lightgray", fontWeight: "lighter", margin: "0px", paddingRight: "50px", float:"right"}}>Publish to Heybox @今日的命运2</span>
+//       <span style={{color: "lightgray", fontWeight: "lighter", margin: "0px", paddingRight: "50px", float:"right"}}>Publish to Heybox @今日的命运2</span>
     </div>
   )
 }
