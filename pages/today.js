@@ -170,15 +170,15 @@ const shieldIcons = [
 
 const captainsIcons = [
   {
-    name: "屏障勇士",
+    name: "屏障",
     icon: "https://www.bungie.net/common/destiny2_content/icons/2ac9bcf4a961c3b3e31da7b76a5a87f9.png",
   },
   {
-    name: "过载勇士",
+    name: "过载",
     icon: "https://www.bungie.net/common/destiny2_content/icons/c4d9c4f1ec3167e272286bb155dc15f4.png",
   },
   {
-    name: "势不可挡勇士",
+    name: "势不可挡",
     icon: "https://bungie.net/common/destiny2_content/icons/0e40371c49f0beac97e5fd9dc2ea9348.png",
   },
 ]
@@ -667,13 +667,13 @@ function Today({todayData}) {
         bgSize='contain' 
         bgRepeat='no-repeat' 
         padding='0rem 0px 0px' 
-        bgImage={'linear-gradient(rgba(0,0,0,0) 41vw, rgba(14, 21, 27, 1) 44.7vw), url("https://images.contentstack.io/v3/assets/blte410e3b15535c144/blt22caaf99cf344591/637d4de50f2f8f10dd0e6aa7/s19-gear-01.jpg")'}
+        bgImage={'linear-gradient(rgba(0,0,0,0) 41vw, rgba(14, 21, 27, 1) 44.7vw), url("https://images.contentstack.io/v3/assets/blte410e3b15535c144/blt31ab90e865f7815d/63f4e6b3df06a564dde0e583/s20-hero-bg.jpg")'}
       >
         <TodayHeader seasonInfo={todayData.seasonInfo} />
         {todayData.losts ? <LostSector lostSectorInfo={todayData.losts} /> : ''}
-        <Activitys activitys = {todayData.activitys} />
+        {todayData.activitys ? <Activitys activitys = {todayData.activitys} /> : ''}
         <Center><Divider w='90%' orientation='horizontal' pt='0.3vw' opacity='0.4'/></Center>
-        <Vendors vendorsInfo={todayData.vendorsInfo} />
+        {todayData.vendorsInfo ? <Vendors vendorsInfo={todayData.vendorsInfo} /> : ''}
         <TQInfo />
       </Box>
     </Center>
