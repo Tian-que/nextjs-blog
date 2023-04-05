@@ -504,7 +504,7 @@ function VendorTrades({datas}) {
                 </Box>
                 <Box pl='0.5vw' maxW='11vw'>
                   <Text fontSize='2vw' lineHeight='1.2' isTruncated>{data.name.startsWith("购买") ? data.name.slice(2) : data.name}</Text>
-                  <Text color='darkgrey' fontSize='2vw' whiteSpace='pre-wrap' >{data.quantity.toLocaleString()}</Text>
+                  {data.quantity ? <Text color='darkgrey' fontSize='2vw' whiteSpace='pre-wrap' >{data.quantity.toLocaleString()}</Text> : ''}
                 </Box>
                 </Flex>
               <Spacer opacity='0.4' pt='0.5vw'><Divider maxW='16vw'/></Spacer>
@@ -633,7 +633,7 @@ function VendorSale({vendorSale}) {
     <Center pt='3.5vw' display='grid'>
       <VendorImgCard vendorInfo={vendorSale}/>
       {vendorSale.sales.mods ? <VendorMods mods={vendorSale.sales.mods} vendorName={vendorSale.name}/> : ''}
-      {/* {vendorSale.sales.brightDust ? <VendorBrightDust datas={vendorSale.sales.brightDust}/> : ''} */}
+      {vendorSale.sales.brightDust ? <VendorBrightDust datas={vendorSale.sales.brightDust}/> : ''}
       {vendorSale.sales.weeklyOffer ? <VendorWeeklyOffer datas={vendorSale.sales.weeklyOffer}/> : ''}
       {vendorSale.sales.trades ? <VendorTrades datas={vendorSale.sales.trades}/> : ''}
       {vendorSale.sales.bountys ? <VendorBountys datas={vendorSale.sales.bountys}/> : ''}
